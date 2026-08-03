@@ -1,0 +1,10 @@
+<svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="76" height="76" rx="38" fill="#FEFAF3" fill-opacity="0.2"/>
+<path d="M38 56.4375C48.1828 56.4375 56.4375 48.1828 56.4375 38C56.4375 27.8172 48.1828 19.5625 38 19.5625C27.8172 19.5625 19.5625 27.8172 19.5625 38C19.5625 48.1828 27.8172 56.4375 38 56.4375Z" stroke="#FEFAF3" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M38 31.75C39.7259 31.75 41.125 30.3509 41.125 28.625C41.125 26.8991 39.7259 25.5 38 25.5C36.2741 25.5 34.875 26.8991 34.875 28.625C34.875 30.3509 36.2741 31.75 38 31.75Z" stroke="#FEFAF3" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M19.8217 34.875H56.1783" stroke="#FEFAF3" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M53.3025 27.5686L41.125 34.8751V56.1784" stroke="#FEFAF3" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M22.6975 27.5686L34.875 34.8751V56.1784" stroke="#FEFAF3" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M26.1625 52.2518L34.875 44.25" stroke="#FEFAF3" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M41.125 44.25L49.8375 52.2518" stroke="#FEFAF3" stroke-width="2" stroke-miterlimit="10"/>
+</svg>
