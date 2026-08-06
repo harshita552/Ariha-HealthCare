@@ -6148,12 +6148,6 @@ textarea.w-input, textarea.w-select {
   background-size: cover;
 }
 
-/* breathing room between the slider arrows and the CTA band on desktop */
-@media screen and (min-width: 992px) {
-  .section-cta {
-    margin-top: 20px;
-  }
-}
 
 .section-cta.nav-dark {
   background-color: var(--cyaan);
@@ -13379,5 +13373,16 @@ textarea.w-input, textarea.w-select {
 
   #w-node-_201046a5-6290-8d28-683e-78c2cfda8e08-7b08bd8d, #w-node-ce623537-8cec-42b0-a262-51401bdad620-7b08bd8d, #w-node-_2b09ab7c-49f4-e8d9-566e-442ba2b554d1-7b08bd8d, #w-node-_1d62e2ec-a4b8-95d7-280d-f0ae4a258abc-e3475203, #w-node-_1d62e2ec-a4b8-95d7-280d-f0ae4a258ac3-e3475203, #w-node-_1d62e2ec-a4b8-95d7-280d-f0ae4a258aca-e3475203 {
     grid-area: span 1 / span 1 / span 1 / span 1;
+  }
+}
+
+/* Breathing room between the blog slider arrows and the CTA band on desktop.
+   Padding on the cream section rather than margin on the CTA - a margin would
+   expose the black page background as a visible band between them.
+   Placed last and matching .nav-light specificity so it beats the
+   padding-bottom: 0% rules in the 1280px and 1440px blocks. */
+@media screen and (min-width: 992px) {
+  .section-blogs.nav-light {
+    padding-bottom: 20px;
   }
 }
