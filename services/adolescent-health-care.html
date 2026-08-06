@@ -775,10 +775,14 @@ document.getElementById('appointment-date').min =
 </script>
 <style>
   .faq-top { cursor: pointer; }
-  /* keeps the original padding/spacing; only the content height animates */
-  .faq-bottom { height: 0; overflow: hidden; transition: height .4s cubic-bezier(.4, 0, .2, 1); }
-  .faq .answer-class { display: block; }
+  /* padding lives on the answer, not on the collapsing box. Padding on
+     .faq-bottom would still render at height 0 and leak the first lines of
+     every answer through the overflow. */
+  .faq-bottom { height: 0; padding: 0; overflow: hidden; transition: height .4s cubic-bezier(.4, 0, .2, 1); }
+  .faq .answer-class { display: block; padding: 1rem 1rem 2rem 1rem; }
   .faq .faq-icon { transition: transform .4s cubic-bezier(.4, 0, .2, 1); }
+  /* keeps the row rhythm now that the collapsed box contributes no height */
+  .faq { padding-bottom: 1.5rem; }
 </style>
 <script>
   (function () {

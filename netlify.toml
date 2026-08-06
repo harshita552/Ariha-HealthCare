@@ -1,0 +1,5 @@
+# Only declares where functions live. Build and publish settings are
+# deliberately left out so the existing dashboard configuration keeps applying.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
