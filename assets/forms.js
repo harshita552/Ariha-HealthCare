@@ -24,7 +24,11 @@
       return;
     }
 
-    if (!form.hasAttribute('data-netlify')) return;
+    // Netlify strips data-netlify from the served HTML once it registers the
+    // form at build time, so that attribute is absent in production. Key off
+    // the hidden form-name input instead, which survives.
+    var nameField = form.querySelector('input[name="form-name"]');
+    if (!nameField && !form.hasAttribute('data-netlify')) return;
 
     e.preventDefault();
     e.stopPropagation();
