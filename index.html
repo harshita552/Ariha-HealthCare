@@ -1252,9 +1252,9 @@
                     id="appointment-email" /></div>
                 <div class="number-field"><label for="appointment-phone" class="field-label-5">Phone
                     Number*</label><input
-                    class="text-field-6 w-node-_20bceff9-50ff-f00b-ff81-a3b0ff229b4d-7b08bd8d w-input" maxlength="256"
+                    class="text-field-6 w-node-_20bceff9-50ff-f00b-ff81-a3b0ff229b4d-7b08bd8d w-input" maxlength="10"
                     name="Phone" data-name="appointment-phone" placeholder="" type="tel"
-                    id="appointment-phone" required="" /></div>
+                    id="appointment-phone" required="" minlength="9" maxlength="10" pattern="[0-9]{9,10}" inputmode="numeric" title="Enter a 9 or 10 digit phone number, digits only" /></div>
                 <div class="service-field"><label for="appointment-service" class="field-label-6">Choose a
                     service*</label><select id="appointment-service" name="Service"
                     data-name="appointment-service" required=""

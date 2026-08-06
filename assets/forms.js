@@ -13,6 +13,20 @@
     return params.toString();
   }
 
+  // Phone: digits only, 9-10 of them. The pattern attribute blocks submit;
+  // this stops anything non-numeric being typed or pasted in the first place.
+  document.addEventListener('input', function (e) {
+    var el = e.target;
+    if (!el || el.name !== 'Phone') return;
+    var digits = el.value.replace(/\D/g, '').slice(0, 10);
+    if (el.value !== digits) el.value = digits;
+    el.setCustomValidity(
+      digits.length === 0 || digits.length === 9 || digits.length === 10
+        ? ''
+        : 'Please enter a 9 or 10 digit phone number.'
+    );
+  });
+
   document.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form || !form.hasAttribute) return;
