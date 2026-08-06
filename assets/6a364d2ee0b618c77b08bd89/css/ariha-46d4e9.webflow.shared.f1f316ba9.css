@@ -6388,7 +6388,7 @@ textarea.w-input, textarea.w-select {
 }
 
 .div-block-29 {
-  margin-top: -26px;
+  margin-top: -20px;
 }
 
 .heading-17 {
@@ -12680,17 +12680,22 @@ textarea.w-input, textarea.w-select {
     line-height: 120%;
   }
 
+  /* arrows share the dots' row, as in the design. The -20px centres the 50px
+     arrow against the short dots strip; without it they sat a row lower and
+     overlapped the CTA card below. */
   .left-arrow-5 {
-    top: 103.5%;
+    top: 100.5%;
     left: auto;
     right: 50%;
+    margin-top: -26px;
     margin-right: 38px;
   }
 
   .right-arrow-5 {
     margin-left: 38px;
     margin-right: 0;
-    top: 103.5%;
+    top: 100.5%;
+    margin-top: -26px;
     left: 50%;
     right: auto;
   }
@@ -13376,13 +13381,3 @@ textarea.w-input, textarea.w-select {
   }
 }
 
-/* Breathing room between the blog slider arrows and the CTA band on desktop.
-   Padding on the cream section rather than margin on the CTA - a margin would
-   expose the black page background as a visible band between them.
-   Placed last and matching .nav-light specificity so it beats the
-   padding-bottom: 0% rules in the 1280px and 1440px blocks. */
-@media screen and (min-width: 992px) {
-  .section-blogs.nav-light {
-    padding-bottom: 20px;
-  }
-}
