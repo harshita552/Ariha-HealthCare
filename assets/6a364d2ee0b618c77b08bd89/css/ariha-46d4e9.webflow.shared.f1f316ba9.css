@@ -4767,6 +4767,10 @@ textarea.w-input, textarea.w-select {
   font-weight: 600;
 }
 
+.stats-container.stats-first {
+  transform: translateY(7px);
+}
+
 .image {
   max-height: 60px;
   margin-bottom: 20px;
@@ -5127,8 +5131,10 @@ textarea.w-input, textarea.w-select {
   border-radius: 12px;
   width: 30%;
   max-width: 100%;
-  height: 490px;
-  max-height: 500px;
+  /* min-height, not height: longer titles must not spill past the card */
+  height: auto;
+  min-height: 490px;
+  max-height: none;
 }
 
 .slide-2 {
@@ -5170,12 +5176,25 @@ textarea.w-input, textarea.w-select {
   width: 100%;
   height: 160px;
   max-height: 200px;
+  /* crop to the card instead of stretching when the source aspect differs */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* spam honeypot - must stay hidden from real users */
+.hp-field {
+  display: none !important;
 }
 
 .blog-category {
   background-color: #ff8e6e33;
   border-radius: 100px;
-  max-width: 30%;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.blog-category .text-block-11 {
+  white-space: nowrap;
 }
 
 .blog-category.green-bg {
@@ -5445,7 +5464,17 @@ textarea.w-input, textarea.w-select {
 .div-block-15 {
   border: 1px solid var(--cyaan);
   border-radius: 100px;
-  padding: 2%;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.div-block-15 img {
+  width: 21px;
+  height: 21px;
 }
 
 .image-17 {
@@ -8441,6 +8470,7 @@ textarea.w-input, textarea.w-select {
 
   .div-block-8 {
     white-space: nowrap;
+    padding-top: 8px;
   }
 
   .column, .column-2, .column-3 {
@@ -8546,12 +8576,14 @@ textarea.w-input, textarea.w-select {
   }
 
   .slider-card {
-    height: 530px;
-    max-height: 550px;
+    height: auto;
+    min-height: 530px;
+    max-height: none;
   }
 
   .slider-card.slider-card2, .slider-card.slider-card3 {
-    height: 530px;
+    height: auto;
+    min-height: 530px;
   }
 
   .image-9 {
@@ -9156,12 +9188,14 @@ textarea.w-input, textarea.w-select {
   }
 
   .slider-card {
-    height: 550px;
-    max-height: 550px;
+    height: auto;
+    min-height: 550px;
+    max-height: none;
   }
 
   .slider-card.slider-card2, .slider-card.slider-card3 {
-    height: 550px;
+    height: auto;
+    min-height: 550px;
   }
 
   .left-arrow-2 {
@@ -10035,13 +10069,13 @@ textarea.w-input, textarea.w-select {
   .left-arrow {
     max-width: 30px;
     max-height: 30px;
-    left: -31%;
+    left: 0%;
   }
 
   .right-arrow {
     max-width: 30px;
     max-height: 30px;
-    right: 118%;
+    right: 0%;
   }
 
   .blog-footer {
@@ -11124,8 +11158,27 @@ textarea.w-input, textarea.w-select {
     margin-top: -100px;
   }
 
-  .global-copy-wrap.blog-wrap.contact-wrap, .global-copy-wrap.blog-wrap.service-wrap {
+  .global-copy-wrap.blog-wrap.contact-wrap {
     margin-top: 100px;
+  }
+
+  /* article pages have no hero image to pull up into, so the -100px above
+     would slide the title under the fixed nav */
+  .global-copy-wrap.blog-wrap.article-wrap {
+    margin-top: 36px;
+  }
+
+  /* Service hero: anchor the copy to the top of the hero rather than centring it
+     in a 100vh box, so clearance below the nav is the same on every phone. */
+  .global-copy-wrap.blog-wrap.service-wrap {
+    margin-top: 0;
+  }
+
+  .hero-slider-copy-wrap.service-hero-copy {
+    height: 100%;
+    margin-top: 0;
+    padding-top: 6.5rem;
+    align-items: flex-start;
   }
 
   .global-copy-wrap.about-us-wrap {
@@ -11948,7 +12001,9 @@ textarea.w-input, textarea.w-select {
 
   .slider-card {
     width: 90%;
-    height: 500px;
+    height: auto;
+    min-height: 500px;
+    max-height: none;
     display: block;
   }
 
@@ -12544,6 +12599,14 @@ textarea.w-input, textarea.w-select {
     background-color: var(--creme);
   }
 
+  .image-27.blog-mobile-image:not(.contact-us-mob) {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
   .image-27.blog-mobile-image.contact-us-mob {
     align-items: center;
   }
@@ -12612,19 +12675,22 @@ textarea.w-input, textarea.w-select {
   }
 
   .left-arrow-5 {
-    top: 102%;
-    right: 35%;
+    top: 103.5%;
+    left: auto;
+    right: 50%;
+    margin-right: 38px;
   }
 
   .right-arrow-5 {
-    margin-left: 0;
+    margin-left: 38px;
     margin-right: 0;
-    top: 102%;
-    left: 62%;
+    top: 103.5%;
+    left: 50%;
+    right: auto;
   }
 
   .slide-nav-2.b-slider-dot {
-    top: 103%;
+    top: 100.5%;
     left: 0%;
   }
 
