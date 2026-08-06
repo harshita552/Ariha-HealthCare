@@ -6148,6 +6148,13 @@ textarea.w-input, textarea.w-select {
   background-size: cover;
 }
 
+/* breathing room between the slider arrows and the CTA band on desktop */
+@media screen and (min-width: 992px) {
+  .section-cta {
+    margin-top: 20px;
+  }
+}
+
 .section-cta.nav-dark {
   background-color: var(--cyaan);
 }
