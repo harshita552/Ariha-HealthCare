@@ -3,12 +3,14 @@
 // site JS can hijack it; only touches forms marked data-netlify.
 (function () {
   function encode(form) {
-    var data = new FormData(form);
-    var pairs = [];
-    data.forEach(function (value, key) {
-      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    // URLSearchParams encodes spaces as "+", which is what
+    // application/x-www-form-urlencoded expects. encodeURIComponent emits
+    // %20, which is not reliably accepted for field names containing spaces.
+    var params = new URLSearchParams();
+    new FormData(form).forEach(function (value, key) {
+      params.append(key, value);
     });
-    return pairs.join('&');
+    return params.toString();
   }
 
   document.addEventListener('submit', function (e) {
