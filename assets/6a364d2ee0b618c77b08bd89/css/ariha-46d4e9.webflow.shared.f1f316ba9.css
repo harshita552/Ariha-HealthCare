@@ -5141,12 +5141,14 @@ textarea.w-input, textarea.w-select {
   vertical-align: top;
 }
 
+/* extra offset keeps the arrows clear of the cards, which grow with content */
 .left-arrow-2 {
   border-radius: 100px;
   max-width: 45px;
   max-height: 45px;
   top: 75%;
   left: 45%;
+  margin-top: 100px;
 }
 
 .right-arrow-2 {
@@ -5155,6 +5157,7 @@ textarea.w-input, textarea.w-select {
   max-height: 45px;
   top: 75%;
   left: 7%;
+  margin-top: 100px;
 }
 
 .slider-image-block {
@@ -12018,11 +12021,13 @@ textarea.w-input, textarea.w-select {
   .left-arrow-2 {
     top: 80%;
     left: 37%;
+    margin-top: 60px;
   }
 
   .right-arrow-2 {
     top: 80%;
     left: 17%;
+    margin-top: 60px;
   }
 
   .blog-footer {
