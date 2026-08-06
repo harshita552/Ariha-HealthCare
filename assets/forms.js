@@ -13,7 +13,18 @@
 
   document.addEventListener('submit', function (e) {
     var form = e.target;
-    if (!form || !form.hasAttribute || !form.hasAttribute('data-netlify')) return;
+    if (!form || !form.hasAttribute) return;
+
+    // Search box: never submit anywhere. Inline onsubmit is not enough here,
+    // the bundled site JS binds its own handler and posts regardless.
+    if (form.hasAttribute('data-no-submit')) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return;
+    }
+
+    if (!form.hasAttribute('data-netlify')) return;
 
     e.preventDefault();
     e.stopPropagation();
