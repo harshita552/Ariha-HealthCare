@@ -13421,3 +13421,12 @@ textarea.w-input, textarea.w-select {
 .column-23 {
   padding-left: 10px;
 }
+
+/* Blog listing cards are anchors so the whole card is clickable. Reset the
+   default link colour and underline so the card looks exactly as before. */
+a.blog-card,
+a.blog-card:hover,
+a.blog-card:visited {
+  color: inherit;
+  text-decoration: none;
+}
