@@ -37,6 +37,11 @@
     if (form.dataset.sending === '1') return;
     form.dataset.sending = '1';
 
+    // fallback: if the page label is missing, record the path so a submission
+    // is never left without a source
+    var pageField = form.querySelector('input[name="Page"]');
+    if (pageField && !pageField.value) pageField.value = location.pathname;
+
     var wrapper = form.closest('.w-form') || form.parentElement;
     var done = wrapper ? wrapper.querySelector('.w-form-done') : null;
     var fail = wrapper ? wrapper.querySelector('.w-form-fail') : null;
