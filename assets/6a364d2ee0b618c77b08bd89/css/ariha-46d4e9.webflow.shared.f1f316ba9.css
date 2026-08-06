@@ -13381,3 +13381,43 @@ textarea.w-input, textarea.w-select {
   }
 }
 
+
+/* Footer contact rows (Call Us / Email Us / Find Us).
+   Each icon sits in a w-col-2, which is a percentage of its own row - and the
+   three rows are different widths (190/301/264px), so one 46x46 source was
+   rendering at 24, 43 and 37px. Pin the icon column and the image instead. */
+.columns-12,
+.columns-13,
+.columns-14 {
+  align-items: center;
+}
+
+.columns-12 > .w-col-2,
+.columns-13 > .w-col-2,
+.columns-14 > .w-col-2 {
+  flex: 0 0 52px;
+  width: 52px;
+  min-width: 52px;
+}
+
+.columns-12 > .w-col-10,
+.columns-13 > .w-col-10,
+.columns-14 > .w-col-10 {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.columns-12 .image-14,
+.columns-13 .image-14,
+.columns-14 .image-14 {
+  width: 44px;
+  height: 44px;
+  max-width: none;
+}
+
+/* .column-31 and .column-32 (Email Us / Find Us) carry a 10px inset that
+   .column-23 (Call Us) does not, so its row started 10px to the left of the
+   other two - most visible on mobile where the three stack. */
+.column-23 {
+  padding-left: 10px;
+}
