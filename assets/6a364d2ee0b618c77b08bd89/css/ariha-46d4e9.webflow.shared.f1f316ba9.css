@@ -13446,3 +13446,65 @@ a.blog-card:visited {
   width: 100%;
   box-sizing: border-box;
 }
+
+/* Services page - "Care for Every Chapter of Womanhood": copy left, image
+   right, on the existing teal band. Top-aligned and left-aligned to match the
+   design - .heading is centred site-wide, so it is overridden here. */
+.approach-split {
+  display: flex;
+  align-items: flex-start;
+  gap: 72px;
+}
+
+.approach-split-copy {
+  flex: 0 1 46%;
+}
+
+.approach-split-copy .heading {
+  text-align: left;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 46px;
+}
+
+.approach-split-para {
+  color: var(--creme);
+  font-family: var(--_topography---body);
+  font-size: 20px;
+  line-height: 32px;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.approach-split-media {
+  flex: 1 1 54%;
+}
+
+.approach-split-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 991px) {
+  .approach-split {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .approach-split-copy,
+  .approach-split-media {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .approach-split-para {
+    font-size: 17px;
+    line-height: 28px;
+    margin-top: 16px;
+  }
+}
