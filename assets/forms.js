@@ -40,11 +40,10 @@
       return;
     }
 
-    // Netlify strips data-netlify from the served HTML once it registers the
-    // form at build time, so that attribute is absent in production. Key off
-    // the hidden form-name input instead, which survives.
+    // Every handled form carries a hidden form-name identifying it to the
+    // /api/submit function.
     var nameField = form.querySelector('input[name="form-name"]');
-    if (!nameField && !form.hasAttribute('data-netlify')) return;
+    if (!nameField) return;
 
     e.preventDefault();
     e.stopPropagation();
@@ -71,7 +70,7 @@
       button.disabled = true;
     }
 
-    fetch('/', {
+    fetch('/api/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode(form)
