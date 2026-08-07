@@ -77,8 +77,24 @@
     })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        form.style.display = 'none';
         if (fail) fail.style.display = 'none';
+
+        // Forms with data-inline-success confirm in place - the field row is
+        // swapped for the message so the layout doesn't jump. Used by the
+        // newsletter, where the default grey panel replaced the whole pill.
+        var inline = form.getAttribute('data-inline-success');
+        var target = form.querySelector('[data-success-target]');
+        if (inline && target) {
+          var msg = document.createElement('div');
+          msg.className = 'form-inline-success';
+          msg.setAttribute('role', 'status');
+          msg.textContent = inline;
+          target.innerHTML = '';
+          target.appendChild(msg);
+          return;
+        }
+
+        form.style.display = 'none';
         if (done) done.style.display = 'block';
         form.reset();
       })

@@ -13430,3 +13430,19 @@ a.blog-card:visited {
   color: inherit;
   text-decoration: none;
 }
+
+/* Inline form confirmation. The white pill is the input itself, and the
+   section behind is the same teal as the text colour - so the message has to
+   carry the white background or it would be invisible. */
+.form-inline-success {
+  background-color: #fff;
+  border-radius: 92.88px;
+  color: var(--cyaan);
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  min-height: 50px;
+  padding: 14px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
