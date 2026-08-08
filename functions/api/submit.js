@@ -136,7 +136,9 @@ export async function onRequestPost(context) {
     if (!res.ok) {
       const detail = await res.text();
       console.error('brevo email failed', res.status, detail);
-      return json({ ok: false, error: 'send_failed' }, 502);
+      // Temporary: surfaces Brevo's reason in the response so the cause is
+      // visible without dashboard log access. Remove once diagnosed.
+      return json({ ok: false, error: 'send_failed', brevoStatus: res.status, brevoDetail: detail.slice(0, 300) }, 502);
     }
   } catch (err) {
     console.error('brevo email threw', err);
