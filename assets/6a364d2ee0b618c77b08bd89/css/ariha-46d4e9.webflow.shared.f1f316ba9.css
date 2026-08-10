@@ -13508,3 +13508,9 @@ a.blog-card:visited {
     margin-top: 16px;
   }
 }
+
+/* Appointment form now has Date and Time side by side, so the message box
+   takes its own full-width row beneath them. */
+.form-6 .message-field {
+  grid-column: 1 / -1;
+}

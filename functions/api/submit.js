@@ -20,7 +20,7 @@ const BREVO_CONTACT_ENDPOINT = 'https://api.brevo.com/v3/contacts';
 
 // Only these keys are ever read from a submission. Anything else is ignored,
 // so a crafted request can't inject arbitrary content into the email.
-const ALLOWED_FIELDS = ['Page', 'Name', 'Email', 'Phone', 'Service', 'Appointment Date', 'Message', 'Consent'];
+const ALLOWED_FIELDS = ['Page', 'Name', 'Email', 'Phone', 'Service', 'Appointment Date', 'Time', 'Message', 'Consent'];
 
 const FORMS = {
   appointments: { label: 'appointment', subject: 'New appointment request' },
@@ -84,10 +84,27 @@ export async function onRequestPost(context) {
 
   const siteUrl = env.SITE_URL || 'https://arihahealthcare.com';
   const senderName = env.BREVO_SENDER_NAME || 'Ariha Healthcare Website';
+  // Values pasted into a dashboard often carry invisible characters - zero
+  // width spaces, non-breaking spaces, stray quotes - which trim() leaves in
+  // place and Brevo then rejects as a malformed address. Strip them, then
+  // keep only addresses that actually look like addresses.
+  const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  function cleanEmail(value) {
+    return String(value)
+      .replace(/[​-‍﻿ ]/g, '') // zero-width + nbsp
+      .replace(/[<>"']/g, '')
+      .trim();
+  }
+
   const recipients = env.NOTIFY_EMAIL.split(',')
-    .map(s => s.trim())
-    .filter(Boolean)
+    .map(cleanEmail)
+    .filter(email => EMAIL_RE.test(email))
     .map(email => ({ email }));
+
+  if (!recipients.length) {
+    console.error('submit: NOTIFY_EMAIL contains no valid address:', JSON.stringify(env.NOTIFY_EMAIL));
+    return json({ ok: false, error: 'no_valid_recipient' }, 500);
+  }
 
   const greeting =
     config.label === 'appointment'
