@@ -6217,7 +6217,7 @@ textarea.w-input, textarea.w-select {
 
 .why-choose-reasons {
   text-align: center;
-  padding-top: 15%;
+  padding-top: 8%;
   position: relative;
 }
 
@@ -6230,8 +6230,8 @@ textarea.w-input, textarea.w-select {
 }
 
 .reason-content-wrap.top-reason {
-  top: 0%;
-  left: 42%;
+  top: -5%;
+  left: 43%;
 }
 
 .reason-content-wrap.top-right {
@@ -6242,14 +6242,14 @@ textarea.w-input, textarea.w-select {
 
 .reason-content-wrap.bottom-right {
   text-align: left;
-  top: 43%;
-  right: 0%;
+  top: 55%;
+  right: 5%;
 }
 
 .reason-content-wrap.top-left {
   text-align: right;
   top: 10%;
-  left: 12%;
+  left: 18%;
 }
 
 .reason-content-wrap.bottom-left {
@@ -7283,6 +7283,9 @@ textarea.w-input, textarea.w-select {
 
 .section-contact-hero {
   background-color: var(--creme);
+  background-image: url("../6a44e47bd0a39e686a61501d_TransparentImg.png");
+    background-position: 0 0;
+    background-size: cover;
 }
 
 @media screen and (min-width: 1280px) {
@@ -8083,7 +8086,8 @@ textarea.w-input, textarea.w-select {
 
   .reason-content-wrap.bottom-left {
     text-align: right;
-    top: 43%;
+    top: 49%;
+    left: 0%;
   }
 
   .heading-12 {
@@ -12848,7 +12852,7 @@ textarea.w-input, textarea.w-select {
   }
 
   .section_why_choose.nav-light {
-    background-size: cover;
+    background-size: auto;
   }
 
   .why-choose-reasons {
