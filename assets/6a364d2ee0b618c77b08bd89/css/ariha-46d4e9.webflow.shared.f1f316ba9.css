@@ -6217,7 +6217,7 @@ textarea.w-input, textarea.w-select {
 
 .why-choose-reasons {
   text-align: center;
-  padding-top: 15%;
+  padding-top: 8%;
   position: relative;
 }
 
@@ -6230,8 +6230,8 @@ textarea.w-input, textarea.w-select {
 }
 
 .reason-content-wrap.top-reason {
-  top: 0%;
-  left: 42%;
+  top: -5%;
+  left: 43%;
 }
 
 .reason-content-wrap.top-right {
@@ -6242,14 +6242,14 @@ textarea.w-input, textarea.w-select {
 
 .reason-content-wrap.bottom-right {
   text-align: left;
-  top: 43%;
-  right: 0%;
+  top: 55%;
+  right: 5%;
 }
 
 .reason-content-wrap.top-left {
   text-align: right;
   top: 10%;
-  left: 12%;
+  left: 18%;
 }
 
 .reason-content-wrap.bottom-left {
@@ -7283,6 +7283,9 @@ textarea.w-input, textarea.w-select {
 
 .section-contact-hero {
   background-color: var(--creme);
+  background-image: url("../6a44e47bd0a39e686a61501d_TransparentImg.png");
+    background-position: 0 0;
+    background-size: cover;
 }
 
 @media screen and (min-width: 1280px) {
@@ -8083,7 +8086,8 @@ textarea.w-input, textarea.w-select {
 
   .reason-content-wrap.bottom-left {
     text-align: right;
-    top: 43%;
+    top: 49%;
+    left: 0%;
   }
 
   .heading-12 {
@@ -8155,7 +8159,7 @@ textarea.w-input, textarea.w-select {
     font-family: var(--_topography---heading);
     white-space: nowrap;
     border-radius: 100px;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .button.email-btn {
@@ -12848,7 +12852,7 @@ textarea.w-input, textarea.w-select {
   }
 
   .section_why_choose.nav-light {
-    background-size: cover;
+    background-size: auto;
   }
 
   .why-choose-reasons {
@@ -13429,4 +13433,88 @@ a.blog-card:hover,
 a.blog-card:visited {
   color: inherit;
   text-decoration: none;
+}
+
+/* Inline form confirmation. The white pill is the input itself, and the
+   section behind is the same teal as the text colour - so the message has to
+   carry the white background or it would be invisible. */
+.form-inline-success {
+  background-color: #fff;
+  border-radius: 92.88px;
+  color: var(--cyaan);
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  min-height: 50px;
+  padding: 14px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Services page - "Care for Every Chapter of Womanhood": copy left, image
+   right, on the existing teal band. Top-aligned and left-aligned to match the
+   design - .heading is centred site-wide, so it is overridden here. */
+.approach-split {
+  display: flex;
+  align-items: flex-start;
+  gap: 72px;
+}
+
+.approach-split-copy {
+  flex: 0 1 46%;
+}
+
+.approach-split-copy .heading {
+  text-align: left;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 46px;
+}
+
+.approach-split-para {
+  color: var(--creme);
+  font-family: var(--_topography---body);
+  font-size: 18px;
+  line-height: 30px;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.approach-split-media {
+  flex: 1 1 54%;
+}
+
+.approach-split-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 991px) {
+  .approach-split {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .approach-split-copy,
+  .approach-split-media {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .approach-split-para {
+    font-size: 17px;
+    line-height: 28px;
+    margin-top: 16px;
+  }
+}
+
+/* Appointment form now has Date and Time side by side, so the message box
+   takes its own full-width row beneath them. */
+.form-6 .message-field {
+  grid-column: 1 / -1;
 }
