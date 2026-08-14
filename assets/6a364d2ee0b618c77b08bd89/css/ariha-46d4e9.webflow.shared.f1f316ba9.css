@@ -8159,7 +8159,7 @@ textarea.w-input, textarea.w-select {
     font-family: var(--_topography---heading);
     white-space: nowrap;
     border-radius: 100px;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .button.email-btn {
@@ -13517,4 +13517,15 @@ a.blog-card:visited {
    takes its own full-width row beneath them. */
 .form-6 .message-field {
   grid-column: 1 / -1;
+}
+
+/* .button is set to display:none below 991px to hide the desktop nav CTA,
+   but that also caught both form submit buttons. The existing override for
+   the appointment button only applied at <=479px, so on tablets neither
+   form could be submitted at all. */
+@media screen and (max-width: 991px) {
+  .button.form-submit,
+  .button.apppointment-submit {
+    display: block;
+  }
 }
