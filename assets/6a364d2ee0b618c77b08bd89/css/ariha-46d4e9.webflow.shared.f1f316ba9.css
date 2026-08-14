@@ -13518,3 +13518,14 @@ a.blog-card:visited {
 .form-6 .message-field {
   grid-column: 1 / -1;
 }
+
+/* .button is set to display:none below 991px to hide the desktop nav CTA,
+   but that also caught both form submit buttons. The existing override for
+   the appointment button only applied at <=479px, so on tablets neither
+   form could be submitted at all. */
+@media screen and (max-width: 991px) {
+  .button.form-submit,
+  .button.apppointment-submit {
+    display: block;
+  }
+}
