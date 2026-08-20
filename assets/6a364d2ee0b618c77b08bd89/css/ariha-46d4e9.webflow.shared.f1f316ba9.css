@@ -6473,6 +6473,13 @@ textarea.w-input, textarea.w-select {
   width: 50%;
   padding: 3% 2%;
   display: flex;
+  background: white;
+   box-shadow:
+    2px 6px 14px 0px #0000001A,
+    10px 24px 26px 0px #00000017,
+    22px 55px 35px 0px #0000000D,
+    39px 97px 42px 0px #00000003,
+    62px 151px 46px 0px #00000000;
 }
 
 .heading-20 {
