@@ -13616,3 +13616,19 @@ a.blog-card:visited {
     max-height: 100vh;
   }
 }
+
+/* PCOS mobile hero ----------------------------------------------------
+   This photo has its benefit icons ("Hormonal Balance", "Better Cycles"
+   ...) baked in at 48% down the frame, which landed on the last lines of
+   the hero paragraph. Drop the photo far enough to clear the text; it
+   also squares the image's top edge with the hero, and the spill at the
+   bottom is clipped to the hero. */
+@media screen and (max-width: 479px) {
+  .section-hero.service-hero-lower .bg-img-wrap {
+    overflow: hidden;
+  }
+
+  .section-hero.service-hero-lower .image-27.blog-mobile-image {
+    bottom: -3.5rem;
+  }
+}
