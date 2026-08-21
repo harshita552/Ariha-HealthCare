@@ -13680,7 +13680,7 @@ a.blog-card:visited {
 @media screen and (max-width: 479px) {
   /* more fixed widths wider than a small phone */
   .div-block-21 {
-    width: 100%;
+    /* width: 100%; */
     max-width: 350px;
   }
 
@@ -13740,5 +13740,36 @@ a.blog-card:visited {
      right edge on tablets */
   .slider.w-slider {
     width: 100%;
+  }
+}
+
+/* The blog slider's arrows and dots are absolutely positioned and hang
+   below the slider itself, leaving them almost touching the teal section
+   underneath. Extend the cream section's own padding rather than adding a
+   margin, which would open a gap and show the page background through. */
+.padding-section-medium.blogs-paading {
+  padding-bottom: 9rem;
+}
+
+/* Same on the home page blog slider, whose section had no bottom padding
+   at all, leaving its arrows about 18px from the section below. */
+.section-blogs .padding-section-medium.home-padding {
+  padding-bottom: 3.5rem;
+}
+
+@media screen and (max-width: 479px) {
+  /* On phones the arrows and dots sit almost against the bottom edge of
+     the blog card. Drop them clear of it; the section padding below can
+     come back in since the arrows now sit lower. */
+  /* they are positioned with an inline `top`, so a bottom offset has no
+     effect - margin is what actually shifts them */
+  .blog-slider .w-slider-arrow-left,
+  .blog-slider .w-slider-arrow-right,
+  .blog-slider .w-slider-nav {
+    margin-top: 1.75rem;
+  }
+
+  .padding-section-medium.blogs-paading {
+    padding-bottom: 6rem;
   }
 }
