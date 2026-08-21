@@ -13553,3 +13553,21 @@ a.blog-card:visited {
 .section-services.nav-light .text-block-66 {
   color: var(--creme);
 }
+
+/* Service cards were laid out with justify-content: space-between and
+   content-width cards, so each label's length shifted everything after it and
+   the columns did not line up between the two rows - drifting 22px by the
+   fourth column. A fixed 4-column grid pins every card to the same x.
+   Mobile already uses a 2-column grid, so this is scoped to desktop. */
+@media screen and (min-width: 992px) {
+  .service-card-col {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* the card centres its icon + label, so a longer label pushed the icon
+     left; anchoring to the start lines the icons up down each column */
+  .service-card-col .service-card {
+    justify-content: flex-start;
+  }
+}
