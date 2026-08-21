@@ -13536,3 +13536,20 @@ a.blog-card:visited {
     display: block;
   }
 }
+
+/* Services section on the service pages now sits on the teal band, matching
+   the other dark sections (same cyaan + Group 13 texture as .section-cta and
+   .section-approach). Text and the new icons are cream. */
+.section-services.nav-light {
+  background-color: var(--cyaan);
+  background-image: url("../6a61a83751888e1a3fb71e1d_Group 13.png");
+  background-position: 0 0;
+  background-size: cover;
+}
+
+.section-services.nav-light .paragraph-3,
+.section-services.nav-light .heading,
+.section-services.nav-light .text-block-65,
+.section-services.nav-light .text-block-66 {
+  color: var(--creme);
+}
