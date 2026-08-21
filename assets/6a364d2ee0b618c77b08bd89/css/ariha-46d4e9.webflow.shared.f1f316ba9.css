@@ -13601,3 +13601,18 @@ a.blog-card:visited {
     aspect-ratio: 2882 / 1844;
   }
 }
+
+/* Mobile service hero height ------------------------------------------
+   The shared mobile hero pins the swiper to a fixed 800px while the
+   content wrap inside it sizes to the viewport (120svh, capped at 100vh).
+   On anything shorter than an 800px viewport the two disagree and the
+   difference shows as an empty cream band under the photo. Give the
+   swiper the same height formula as the wrap so they always agree. */
+@media screen and (max-width: 479px) {
+  .section-hero.service-hero .swiper-container.hero-slider,
+  .section-hero.service-hero .swiper-wrapper.hero-slider,
+  .section-hero.service-hero .swiper-slide.hero-slider {
+    height: 120svh;
+    max-height: 100vh;
+  }
+}
