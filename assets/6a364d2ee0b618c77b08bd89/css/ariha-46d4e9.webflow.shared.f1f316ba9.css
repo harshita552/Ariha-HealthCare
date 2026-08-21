@@ -13769,7 +13769,13 @@ a.blog-card:visited {
     margin-top: 1.75rem;
   }
 
+  /* the dots end up 6px higher than the arrows once both are shifted */
+  .blog-slider .w-slider-nav {
+    margin-top: calc(1.75rem + 6px);
+  }
+
+  /* the shifted arrows eat into the space below, so give it back */
   .padding-section-medium.blogs-paading {
-    padding-bottom: 6rem;
+    padding-bottom: 9rem;
   }
 }
