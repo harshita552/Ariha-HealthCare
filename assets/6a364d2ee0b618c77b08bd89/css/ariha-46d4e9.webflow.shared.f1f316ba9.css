@@ -13571,3 +13571,33 @@ a.blog-card:visited {
     justify-content: flex-start;
   }
 }
+
+/* Service page heroes -------------------------------------------------
+   The shared hero is locked to 720px tall while the service photos are
+   1.65:1, so `object-fit: cover` was trimming the top and bottom of every
+   one. Let the hero take its height from the photo's own ratio instead:
+   the container then matches the image exactly, so `cover` has nothing
+   left to crop and there are no letterbox bands either.
+   min-height keeps room for the copy block (540px) on narrower desktops. */
+@media screen and (min-width: 992px) {
+  .section-hero.service-hero .hero-slider-comp,
+  .section-hero.service-hero .swiper-container.hero-slider,
+  .section-hero.service-hero .swiper-wrapper.hero-slider,
+  .section-hero.service-hero .swiper-slide.hero-slider,
+  .section-hero.service-hero .hero-slider-content-wrap {
+    height: auto;
+  }
+
+  .section-hero.service-hero .hero-slider-content-wrap {
+    aspect-ratio: 2880 / 1742;
+    min-height: 600px;
+    /* the shared hero caps itself at 52rem from 1440px up, which would start
+       cropping again on wide screens */
+    max-height: none;
+  }
+
+  /* the obstetrics photo is a little taller than the rest */
+  .section-hero.service-hero.service-hero-tall .hero-slider-content-wrap {
+    aspect-ratio: 2882 / 1844;
+  }
+}
