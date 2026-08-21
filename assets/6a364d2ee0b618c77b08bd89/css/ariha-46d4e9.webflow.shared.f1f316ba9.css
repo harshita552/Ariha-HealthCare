@@ -13632,3 +13632,15 @@ a.blog-card:visited {
     bottom: -3.5rem;
   }
 }
+
+/* Mobile care journey cards -------------------------------------------
+   The card is pinned to a fixed 180px on phones, so any step whose copy
+   runs longer than that spills out through the bottom of the white box.
+   Let the card grow to fit instead and keep 180px as the floor, so the
+   short steps look exactly as before. */
+@media screen and (max-width: 479px) {
+  .journey-mob-wrap {
+    height: auto;
+    min-height: 180px;
+  }
+}
