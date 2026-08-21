@@ -13644,3 +13644,101 @@ a.blog-card:visited {
     min-height: 180px;
   }
 }
+
+/* Responsive fixes ----------------------------------------------------
+   Three hard pixel widths that stopped the layout adapting. */
+@media screen and (max-width: 479px) {
+  /* The hero images carry width="400" in the markup. max-width:100% can
+     only shrink an image, never grow it, so on any phone wider than
+     400px the photo stopped short and left a strip of background down
+     one side - which reads as the photo being off centre. */
+  .image-27 {
+    width: 100%;
+  }
+
+  /* A hard 340px card set the page's minimum width, so any screen
+     narrower than about 375px scrolled sideways. */
+  .cardblock {
+    width: 100%;
+    max-width: 340px;
+  }
+}
+
+/* The footer's link columns would not shrink below their content width,
+   so they pushed past the right edge on tablets. */
+@media screen and (max-width: 991px) {
+  .footer .div-block-12 {
+    flex-wrap: wrap;
+  }
+
+  .footer .columns-8 {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* more fixed widths wider than a small phone */
+  .div-block-21 {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  /* The contact rows are a fixed 352px, which set the page's minimum
+     width and made anything narrower scroll sideways. */
+  .columns-12,
+  .columns-13,
+  .columns-14 {
+    width: 100%;
+    max-width: 352px;
+  }
+
+  /* They are also flex containers, so the columns size to their content
+     and refuse to shrink - min-width:0 lets the text wrap instead of
+     forcing the row wider than the screen. */
+  .columns-12 > .w-col,
+  .columns-13 > .w-col,
+  .columns-14 > .w-col {
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  /* Three columns that keep their desktop widths on tablets and add up to
+     more than the row they sit in. Same flex problem: setting a width has
+     no effect, they have to be allowed to wrap and shrink. */
+  .columns-15 {
+    flex-wrap: wrap;
+  }
+
+  .columns-15 > .w-col {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* the contact detail lines are a fixed 290px inside an already narrow
+     column, which is what still forced the page wider than small phones */
+  .text-block-18,
+  .text-block-18.green-text {
+    width: 100%;
+    max-width: 290px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* two stat cards side by side are wider than the grid they sit in on
+     small phones - drop them to a single column */
+  .mob-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  /* the slider keeps a fixed 590px, so it and its slides push past the
+     right edge on tablets */
+  .slider.w-slider {
+    width: 100%;
+  }
+}

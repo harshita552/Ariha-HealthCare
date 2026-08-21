@@ -24,7 +24,13 @@ const PAGES = [
   'contact-us.html',
   'blogs.html',
   'blog-template.html',
-  path.join('services', 'adolescent-health-care.html')
+  path.join('services', 'adolescent-health-care.html'),
+  path.join('services', 'pre-pregnancy-care.html'),
+  path.join('services', 'obstetrics-maternity-care.html'),
+  path.join('services', 'pcos-hormonal-health.html'),
+  path.join('services', 'menopause-care.html'),
+  path.join('services', 'gynecology-care.html'),
+  path.join('services', 'laparoscopy.html')
 ];
 
 // Finds the footer <section> and its matching close, counting nested sections.
