@@ -13858,3 +13858,25 @@ a.blog-card:visited {
     display: block;
   }
 }
+
+@media screen and (max-width: 479px) {
+  /* Match the other menu links. The alignment and 18px size come from the
+     `about_us` class rather than `navbar_link`, so a bare link renders
+     centred at 14px. */
+  .navbar_link.mob-only-home {
+    padding: 12px 0 12px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* The open menu is taller than the screen - 998px of content in a 667px
+     box - but overflow was visible, so the last items and the Book An
+     Appointment button could not be reached. */
+  .navbar2_menu.is-page-height-tablet {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
