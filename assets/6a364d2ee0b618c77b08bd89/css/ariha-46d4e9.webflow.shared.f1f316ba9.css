@@ -13846,3 +13846,15 @@ a.blog-card:visited {
     top: -7px;
   }
 }
+
+/* "Home" belongs only in the mobile menu - on desktop the logo already
+   serves that purpose, so it stays hidden above the menu breakpoint. */
+.mob-only-home {
+  display: none;
+}
+
+@media screen and (max-width: 479px) {
+  .mob-only-home {
+    display: block;
+  }
+}
