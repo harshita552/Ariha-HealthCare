@@ -13836,3 +13836,13 @@ a.blog-card:visited {
     height: 34px;
   }
 }
+
+@media screen and (max-width: 479px) {
+  /* The row does not centre its items, so the 34px icon block hangs 7px
+     below the shorter "Contact Us" text box. Lift the icons rather than
+     centring the row, which would push the text down instead. */
+  .social-icons {
+    position: relative;
+    top: -7px;
+  }
+}
