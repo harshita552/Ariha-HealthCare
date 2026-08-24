@@ -3805,6 +3805,7 @@ textarea.w-input, textarea.w-select {
 
 .heading-style-h1.max-width-15ch.green-heading.left-align-h1, .heading-style-h1.max-width-15ch.green-heading.blog-pag-heading, .heading-style-h1.max-width-15ch.about-us-heading.left-align {
   text-align: left;
+  font-weight: 600;
 }
 
 .section_about {
@@ -7315,6 +7316,7 @@ textarea.w-input, textarea.w-select {
     border-radius: 100px;
     padding: 18px 28px;
     font-weight: 500;
+    font-size: 16px;
   }
 
   .button.email-btn {
@@ -11186,7 +11188,7 @@ textarea.w-input, textarea.w-select {
   /* Service hero: anchor the copy to the top of the hero rather than centring it
      in a 100vh box, so clearance below the nav is the same on every phone. */
   .global-copy-wrap.blog-wrap.service-wrap {
-    margin-top: 0;
+    margin-top: -10px;
   }
 
   .hero-slider-copy-wrap.service-hero-copy {
@@ -11435,6 +11437,7 @@ textarea.w-input, textarea.w-select {
 
   .heading-style-h1.max-width-15ch.green-heading.left-align-h1, .heading-style-h1.max-width-15ch.about-us-heading.left-align {
     text-align: center;
+    font-weight: 600;
   }
 
   .section_about.nav-light {
@@ -13778,4 +13781,17 @@ a.blog-card:visited {
   .padding-section-medium.blogs-paading {
     padding-bottom: 9rem;
   }
+}
+
+/* The Practo icon is a 46px badge that draws its own ring, unlike the
+   other social glyphs which are 21px marks sitting inside the ring that
+   .div-block-15 draws. Drop the wrapper's border for this one so the
+   badge is not ringed twice, and let the icon fill the same footprint. */
+.div-block-15.practo-social {
+  border: none;
+}
+
+.div-block-15.practo-social img {
+  width: 44px;
+  height: 44px;
 }
