@@ -13795,3 +13795,44 @@ a.blog-card:visited {
   width: 44px;
   height: 44px;
 }
+
+/* Mobile menu social icons. The nav glyphs are ~22px tall, so the 46px
+   Practo badge has to be brought down to match them. */
+.social-icons .nav-social-link {
+  align-items: center;
+  display: inline-flex;
+}
+
+.social-icons .nav-practo-icon {
+  width: 26px;
+  height: 26px;
+}
+
+@media screen and (max-width: 479px) {
+  /* The mobile menu footer row was only as wide as its content and used a
+     fixed 100px gap, which left the icons floating near the middle.
+     Stretch the row edge to edge and let space-between push them to the
+     right, so "Contact Us" stays left and the icons sit in the corner. */
+  .nav-mob-footer {
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+  }
+
+  .contact-link {
+    margin-right: 0;
+  }
+
+  .social-icons {
+    grid-column-gap: 12px;
+  }
+
+  .social-icons .image-57 {
+    height: 28px;
+  }
+
+  .social-icons .nav-practo-icon {
+    width: 34px;
+    height: 34px;
+  }
+}
