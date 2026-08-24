@@ -13880,3 +13880,19 @@ a.blog-card:visited {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+@media screen and (max-width: 479px) {
+  /* The mobile hero pins the swiper to a fixed 800px while the content
+     wrap inside it is 120svh capped at 100vh. On a short phone (iPhone SE,
+     667px) the wrap is smaller so nothing shows, but on a taller one
+     (iPhone 14 Pro Max, 932px) the wrap is 132px longer than the swiper
+     and the photo hangs out of the hero over the section below.
+     Give the swiper the same height formula so the two always agree.
+     The service pages already carry this fix under .service-hero. */
+  .section-hero .swiper-container.hero-slider,
+  .section-hero .swiper-wrapper.hero-slider,
+  .section-hero .swiper-slide.hero-slider {
+    height: 120svh;
+    max-height: 100vh;
+  }
+}
