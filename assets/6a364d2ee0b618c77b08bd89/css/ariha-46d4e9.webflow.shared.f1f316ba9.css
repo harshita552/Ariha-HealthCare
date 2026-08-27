@@ -13896,3 +13896,29 @@ a.blog-card:visited {
     max-height: 100vh;
   }
 }
+
+/* Blog listing cards -------------------------------------------------
+   The image wrapper has no set width, so each card sized it from its own
+   photo's aspect ratio - 347px, 324px and 281px across the three cards,
+   which left the gap before the text at 39px, 16px and 10px. Pin every
+   card to the first one's geometry so the spacing matches. */
+@media screen and (min-width: 992px) {
+  .blog-card {
+    align-items: stretch;
+  }
+
+  .blog-card .blog-image {
+    flex: 0 0 347px;
+    width: 347px;
+    align-self: stretch;
+  }
+
+  /* height:100% needs a definite parent, which the stretched wrapper gives
+     it - without that the image fell back to its own height and a taller
+     card was left with an empty strip underneath */
+  .blog-card .blog-image img {
+    width: 317px;
+    height: 100%;
+    object-fit: cover;
+  }
+}
