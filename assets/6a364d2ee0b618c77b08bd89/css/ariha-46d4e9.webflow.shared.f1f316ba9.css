@@ -13939,3 +13939,27 @@ a.blog-card:visited {
 body {
   background-color: #fefaf3;
 }
+
+/* From 480px up the two columns sit side by side; below that they stack
+   and the existing mobile rules take over. */
+@media screen and (min-width: 480px) {
+  /* The clinic photo carries a fixed 680px height (700px above 1440px)
+     while the cards beside it are only as tall as their content, so the
+     photo hung below them. Let the row set equal column heights and have
+     the photo fill its side - the same approach the mobile breakpoint
+     already uses for this row. */
+  .columns-17 {
+    align-items: stretch;
+    display: flex;
+  }
+
+  .columns-17 .column-22 {
+    display: flex;
+  }
+
+  .columns-17 .image-15 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
