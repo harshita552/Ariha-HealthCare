@@ -13928,6 +13928,14 @@ a.blog-card:visited {
      content to the end, so the fixed 280px block sat hard against the
      right edge of the card. Align it to the start instead. */
   .contact-card .column-21 {
-    justify-content: end;
+    justify-content: flex-start;
   }
+}
+
+/* The footer is cream but the page canvas underneath is white, so any
+   area the document does not cover - a short page, or the overscroll
+   bounce on touch devices - flashes white below the footer. Match the
+   canvas to the footer so there is nothing to see. */
+body {
+  background-color: #fefaf3;
 }
