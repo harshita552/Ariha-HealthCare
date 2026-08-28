@@ -13953,11 +13953,30 @@ body {
     display: flex;
   }
 
+  /* Narrow the photo column from the default half, giving the width back
+     to the cards. */
   .columns-17 .column-22 {
+    flex: 0 0 45%;
+    width: 45%;
     display: flex;
+    position: relative;
   }
 
+  .columns-17 .column-11 {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  /* Taking the photo out of flow means it adds no height of its own, so
+     the row is sized purely by the cards and the photo fills exactly
+     that - otherwise the photo's own height stretched the row and left
+     empty space under the cards. */
   .columns-17 .image-15 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
