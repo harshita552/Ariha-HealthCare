@@ -13950,14 +13950,15 @@ body {
      already uses for this row. */
   .columns-17 {
     align-items: stretch;
+    column-gap: 1.5rem;
     display: flex;
   }
 
   /* Narrow the photo column from the default half, giving the width back
      to the cards. */
   .columns-17 .column-22 {
-    flex: 0 0 45%;
-    width: 45%;
+    flex: 0 0 40%;
+    width: 40%;
     display: flex;
     position: relative;
   }
