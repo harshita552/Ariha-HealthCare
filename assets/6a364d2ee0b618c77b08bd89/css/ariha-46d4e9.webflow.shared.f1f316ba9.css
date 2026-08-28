@@ -13922,3 +13922,12 @@ a.blog-card:visited {
     object-fit: cover;
   }
 }
+
+@media screen and (max-width: 479px) {
+  /* The emergency paragraph's column is a flex container that pushes its
+     content to the end, so the fixed 280px block sat hard against the
+     right edge of the card. Align it to the start instead. */
+  .contact-card .column-21 {
+    justify-content: end;
+  }
+}

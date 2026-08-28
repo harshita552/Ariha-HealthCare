@@ -24,6 +24,8 @@ const PAGES = [
   'contact-us.html',
   'blogs.html',
   'blog-template.html',
+  'puberty-in-girls-whats-normal.html',
+  'vaginal-delivery-or-c-section.html',
   path.join('services', 'adolescent-health-care.html'),
   path.join('services', 'pre-pregnancy-care.html'),
   path.join('services', 'obstetrics-maternity-care.html'),
