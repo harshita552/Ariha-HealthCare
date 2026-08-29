@@ -13849,14 +13849,9 @@ a.blog-card:visited {
 
 /* "Home" belongs only in the mobile menu - on desktop the logo already
    serves that purpose, so it stays hidden above the menu breakpoint. */
+/* "Home" now shows in the desktop nav as well as the mobile menu. */
 .mob-only-home {
-  display: none;
-}
-
-@media screen and (max-width: 479px) {
-  .mob-only-home {
-    display: block;
-  }
+  display: block;
 }
 
 @media screen and (max-width: 479px) {
@@ -13981,5 +13976,21 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+/* Google Maps embed in place of the contact page photo. It reuses
+   .image-15 so it inherits the sizing already defined there, but an
+   iframe has no intrinsic height, so mobile needs an explicit one. */
+.map-embed {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 19.38px;
+}
+
+@media screen and (max-width: 479px) {
+  .map-embed {
+    height: 400px;
   }
 }
