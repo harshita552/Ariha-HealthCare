@@ -14024,3 +14024,14 @@ body {
   line-height: 1.2;
   color: #ffffff;
 }
+
+/* Author avatars ------------------------------------------------------
+   The blogs listing pins these with width/height attributes, but the
+   article pages have none, so they fell back to the portrait's intrinsic
+   1964px and blew up to 200px and 1165px. Size them here instead.
+   The PNG is already circular, so no radius is needed. */
+.author-image img,
+.doctor-image img {
+  width: 50px;
+  height: 50px;
+}
