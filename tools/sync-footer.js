@@ -23,7 +23,7 @@ const PAGES = [
   'about-us.html',
   'contact-us.html',
   'blogs.html',
-  'superfoods-for-new-moms.html',
+  'second-trimester-what-to-expect.html',
   'puberty-in-girls-whats-normal.html',
   'vaginal-delivery-or-c-section.html',
   path.join('services', 'adolescent-health-care.html'),
