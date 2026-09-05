@@ -14035,3 +14035,35 @@ body {
   width: 50px;
   height: 50px;
 }
+
+/* Appointment modal close button --------------------------------------
+   The modal script already listened for .modal-close, but no such button
+   existed - the only ways out were clicking the backdrop or pressing
+   Escape, neither of which is obvious and Escape is unavailable on a
+   phone. Sticky rather than absolute so it stays reachable while a long
+   form scrolls; the negative bottom margin keeps it overlaying the top
+   right of the card instead of pushing the form down. */
+.modal-close {
+  position: sticky;
+  top: 14px;
+  z-index: 5;
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 14px -34px auto;
+  padding: 0;
+  border: 1px solid rgba(11, 77, 143, 0.15);
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #0b4d8f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background-color: #0b4d8f;
+  color: #ffffff;
+}
