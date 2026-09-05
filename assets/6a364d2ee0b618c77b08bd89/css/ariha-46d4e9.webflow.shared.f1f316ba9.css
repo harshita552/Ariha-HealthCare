@@ -13994,3 +13994,33 @@ body {
     height: 400px;
   }
 }
+
+/* Years-of-experience pill (mobile) ------------------------------------
+   This was a 350x68 PNG with the number baked into it, so the count
+   could not be updated by script. Rebuilt in markup to match the image:
+   teal gradient, light hairline border, white text. */
+.image-21.years-pill {
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 350px;
+  padding: 13px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  background-image: linear-gradient(115deg, #146f74, #1a7b80);
+  display: flex;
+}
+
+.years-pill-num {
+  font-family: var(--_topography---heading), Arial, Helvetica, sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.years-pill-label {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #ffffff;
+}

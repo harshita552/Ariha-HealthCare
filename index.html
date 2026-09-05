@@ -1554,9 +1554,7 @@
                             src="assets/6a364d2ee0b618c77b08bd89/6a4f373ec2bba2008750593d_Frame&#32;2147224751.png"
                             loading="lazy" sizes="100vw"
                             srcset="assets/6a364d2ee0b618c77b08bd89/6a4f373ec2bba2008750593d_Frame&#32;2147224751-p-500.png 500w, assets/6a364d2ee0b618c77b08bd89/6a4f373ec2bba2008750593d_Frame&#32;2147224751.png 636w"
-                            alt="" class="image-20" /><img
-                            src="assets/6a364d2ee0b618c77b08bd89/6a688937c6bf6452fcafc84c_Frame&#32;2147224786.png"
-                            loading="lazy" alt="" class="image-21" />
+                            alt="" class="image-20" /><div class="image-21 years-pill"><span class="years-pill-num" data-years-since="2018">8+</span><span class="years-pill-label">Years of Experience</span></div>
                         </div>
                       </div>
                     </div>
@@ -1586,7 +1584,7 @@
               <div></div>
               <div class="div-block-39">
                 <div class="div-block-9">
-                  <div class="text-block">8+</div>
+                  <div class="text-block" data-years-since="2018">8+</div>
                 </div>
                 <div>
                   <div class="text-block-2">Years of Experience</div>
@@ -2691,6 +2689,20 @@
     })();
   </script>
   <script src="assets/forms.js"></script>
+
+  <!-- years-since script: keeps the experience counter current without a yearly edit -->
+  <script>
+    (function () {
+      var nodes = document.querySelectorAll('[data-years-since]');
+      var thisYear = new Date().getFullYear();
+      for (var i = 0; i < nodes.length; i++) {
+        var start = parseInt(nodes[i].getAttribute('data-years-since'), 10);
+        if (!start) continue;
+        var years = thisYear - start;
+        if (years > 0) nodes[i].textContent = years + '+';
+      }
+    })();
+  </script>
 </body>
 
 </html>
