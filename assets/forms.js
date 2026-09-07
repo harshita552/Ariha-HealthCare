@@ -58,6 +58,108 @@
     markDates();
   }
 
+  // Appointment date: refuse days the clinic is closed ------------------
+  // /api/availability returns the days Dr. Shah has marked away on the
+  // clinic's Google Calendar plus the weekly closed day. A native date input
+  // can only do min/max - it cannot grey out individual days - so the block
+  // happens on selection instead, with the reason shown next to the field.
+  var availability = null;
+
+  function appointmentDateField() {
+    return document.querySelector('input[name="Appointment Date"]');
+  }
+
+  function dateIsBlocked(value) {
+    if (!availability || !value) return false;
+    if (availability.blockedDates.indexOf(value) !== -1) return true;
+    var parts = value.split('-');
+    if (parts.length !== 3) return false;
+    var day = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2])).getUTCDay();
+    return availability.closedWeekdays.indexOf(day) !== -1;
+  }
+
+  function fieldNotice(el) {
+    // the input sits inside a .code-embed-3 wrapper - hang the message off
+    // the field block itself so it lands under the input, not inside it
+    var host = el.closest ? el.closest('.date-field') || el.parentElement : el.parentElement;
+    var note = host.querySelector('.field-notice');
+    if (!note) {
+      note = document.createElement('div');
+      note.className = 'field-notice';
+      note.setAttribute('role', 'status');
+      host.appendChild(note);
+    }
+    return note;
+  }
+
+  function showDateNotice(el, message) {
+    var note = fieldNotice(el);
+    note.textContent = message || '';
+    note.style.display = message ? 'block' : 'none';
+  }
+
+  function checkAppointmentDate(el) {
+    if (!el) return;
+    if (!dateIsBlocked(el.value)) {
+      el.setCustomValidity('');
+      showDateNotice(el, '');
+      return;
+    }
+    var chosen = readableDate(el.value);
+    el.value = '';
+    markDate(el);
+    el.setCustomValidity('');
+    showDateNotice(
+      el,
+      'The clinic is closed on ' + chosen + '. Please choose another date.'
+    );
+  }
+
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+
+  // "2026-10-13" reads as a machine string in a message meant for a patient
+  function readableDate(value) {
+    var parts = String(value || '').split('-');
+    if (parts.length !== 3) return value;
+    var month = MONTHS[Number(parts[1]) - 1];
+    if (!month) return value;
+    return Number(parts[2]) + ' ' + month + ' ' + parts[0];
+  }
+
+  document.addEventListener('change', function (e) {
+    var el = e.target;
+    if (el && el.name === 'Appointment Date') checkAppointmentDate(el);
+  });
+
+  function loadAvailability() {
+    if (!appointmentDateField()) return;
+    fetch('/api/availability', { headers: { accept: 'application/json' } })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || !Array.isArray(data.blockedDates)) return;
+        availability = {
+          blockedDates: data.blockedDates,
+          closedWeekdays: Array.isArray(data.closedWeekdays) ? data.closedWeekdays : []
+        };
+        // a date may already be filled in from a restored form
+        checkAppointmentDate(appointmentDateField());
+      })
+      .catch(function () {
+        // No endpoint (local preview, or the function is down). Booking must
+        // still work, so leave every date selectable.
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadAvailability);
+  } else {
+    loadAvailability();
+  }
+
   document.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form || !form.hasAttribute) return;
@@ -107,6 +209,29 @@
       body: encode(form)
     })
       .then(function (res) {
+        // The server re-checks the date against the calendar. A 409 means the
+        // day was blocked after this page loaded - say so at the field rather
+        // than showing the generic "something went wrong".
+        if (res.status === 409) {
+          return res.json().then(function (body) {
+            if (body && body.error === 'date_unavailable') {
+              var el = appointmentDateField();
+              if (el) {
+                el.value = '';
+                markDate(el);
+                showDateNotice(
+                  el,
+                  'That date has just been marked unavailable. Please choose another.'
+                );
+                el.focus();
+              }
+              availability = null;
+              loadAvailability();
+              return null; // handled - don't fall through to the success path
+            }
+            throw new Error('HTTP 409');
+          });
+        }
         if (!res.ok) throw new Error('HTTP ' + res.status);
         if (fail) fail.style.display = 'none';
 

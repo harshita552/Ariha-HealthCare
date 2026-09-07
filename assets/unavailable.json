@@ -1,0 +1,5 @@
+{
+  "_comment": "Dates the appointment form refuses. This file is the fallback for when the Google Calendar feed is unreachable, and the way to block a date without touching the calendar. blockedDates are single days; blockedRanges are [first, last] and INCLUDE both ends. All dates are YYYY-MM-DD. Sundays are handled by CLOSED_WEEKDAYS in Cloudflare, not here.",
+  "blockedDates": [],
+  "blockedRanges": []
+}

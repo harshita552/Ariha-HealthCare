@@ -14163,3 +14163,13 @@ input.appointment-date:not([data-filled])::-webkit-datetime-edit {
 input.appointment-date[data-filled]::-webkit-datetime-edit {
   color: #3a3a3a;
 }
+
+/* Reason shown under the appointment date when a closed day is picked. */
+.field-notice {
+  margin-top: 8px;
+  font-family: var(--_topography---body);
+  color: #b3261e;
+  font-size: 14px;
+  line-height: 1.4;
+  display: none;
+}

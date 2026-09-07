@@ -15,6 +15,8 @@
  *   SITE_URL             optional. Defaults to https://arihahealthcare.com
  */
 
+import { getAvailability, isBlocked } from './_availability.js';
+
 const BREVO_EMAIL_ENDPOINT = 'https://api.brevo.com/v3/smtp/email';
 const BREVO_CONTACT_ENDPOINT = 'https://api.brevo.com/v3/contacts';
 
@@ -80,6 +82,21 @@ export async function onRequestPost(context) {
 
   if (!fields.length) {
     return json({ ok: false, error: 'empty_submission' }, 400);
+  }
+
+  // The date field refuses blocked days in the browser, but a page cached
+  // before the doctor marked a week away would not know about it - so check
+  // again here, where the answer is always current.
+  if (formName === 'appointments' && data['Appointment Date']) {
+    try {
+      const availability = await getAvailability(env, request);
+      if (isBlocked(data['Appointment Date'], availability)) {
+        return json({ ok: false, error: 'date_unavailable', date: data['Appointment Date'] }, 409);
+      }
+    } catch (err) {
+      // Availability must never be the reason a booking cannot be made.
+      console.error('submit: availability check threw', err);
+    }
   }
 
   const siteUrl = env.SITE_URL || 'https://arihahealthcare.com';
