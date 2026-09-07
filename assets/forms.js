@@ -27,6 +27,37 @@
     );
   });
 
+  // Date inputs: CSS greys the dd-mm-yyyy placeholder until a date is picked,
+  // but it can't tell empty from filled on an optional field (:valid matches
+  // both). Flag the filled state explicitly instead.
+  function markDate(el) {
+    if (el.value) el.setAttribute('data-filled', '');
+    else el.removeAttribute('data-filled');
+  }
+
+  function markDates(root) {
+    var fields = (root || document).querySelectorAll('.appointment-date');
+    for (var i = 0; i < fields.length; i++) markDate(fields[i]);
+  }
+
+  document.addEventListener('input', function (e) {
+    var el = e.target;
+    if (el && el.classList && el.classList.contains('appointment-date')) markDate(el);
+  });
+  document.addEventListener('change', function (e) {
+    var el = e.target;
+    if (el && el.classList && el.classList.contains('appointment-date')) markDate(el);
+  });
+  // form.reset() empties the fields without firing input/change
+  document.addEventListener('reset', function (e) {
+    setTimeout(function () { markDates(e.target); }, 0);
+  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { markDates(); });
+  } else {
+    markDates();
+  }
+
   document.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form || !form.hasAttribute) return;

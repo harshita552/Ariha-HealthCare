@@ -819,39 +819,26 @@
                     to you</div>
                 </div>
                 <div class="spacer"></div>
-                <div class="name-field"><label for="name" class="field-label-4">Name*</label><input
-                    class="text-field-4 w-node-b1d69197-a33d-da02-e2e3-c14f965766b0-4d0987f8 w-input" maxlength="256"
-                    name="Name" data-name="Name" placeholder="" type="text" id="name" required="" /></div>
-                <div class="email-field"><label for="Email" class="field-label-4">Email</label><input
-                    class="text-field-5 w-node-b1d69197-a33d-da02-e2e3-c14f965766b4-4d0987f8 w-input" maxlength="256"
-                    name="Email" data-name="Email" placeholder="" type="email" id="Email" required="" /></div>
-                <div class="number-field"><label for="field" class="field-label-5">Phone Number*</label><input
-                    class="text-field-6 w-node-b1d69197-a33d-da02-e2e3-c14f965766b8-4d0987f8 w-input" maxlength="10"
-                    name="Phone" data-name="Field" placeholder="" type="tel" id="field" required="" minlength="9"
-                    maxlength="10" pattern="[0-9]{9,10}" inputmode="numeric"
-                    title="Enter a 9 or 10 digit phone number, digits only" /></div>
-                <div class="service-field"><label for="field-2" class="field-label-6">Choose a service*</label><select
-                    id="field-2" name="Service" data-name="Field 2" required=""
-                    class="select-field w-node-b1d69197-a33d-da02-e2e3-c14f965766bc-4d0987f8 w-select">
-                    <option value="">Select one...</option>
+                <div class="name-field"><label for="appointment-name" class="field-label-4">Name*</label><input class="text-field-4 w-input" maxlength="256" name="Name" data-name="appointment-name" placeholder="" type="text" id="appointment-name" required="" /></div>
+                <div class="number-field"><label for="appointment-phone" class="field-label-5">Phone Number*</label><input class="text-field-6 w-input" name="Phone" data-name="appointment-phone" placeholder="" type="tel" id="appointment-phone" required="" minlength="9" maxlength="10" pattern="[0-9]{9,10}" inputmode="numeric" title="Enter a 9 or 10 digit phone number, digits only" /></div>
+                <div class="email-field"><label for="appointment-email" class="field-label-4">Email</label><input class="text-field-5 w-input" maxlength="256" name="Email" data-name="appointment-email" placeholder="" type="email" id="appointment-email" /></div>
+                <div class="dob-field"><label for="appointment-dob" class="field-label-7">Date of Birth</label>
+                  <div class="code-embed-3 w-embed"><input type="date" id="appointment-dob" name="Date of Birth" class="w-input appointment-date" style="border-radius: 12px; background-color: transparent; border: 1.1px solid #007276"></div>
+                </div>
+                <div class="service-field"><label for="appointment-service" class="field-label-6">Choose A Service*</label><select id="appointment-service" name="Service" data-name="appointment-service" required="" class="select-field w-select">
+                    <option value="">Select a Service</option>
                     <option value="Adolescent Health Care">Adolescent Health Care</option>
                     <option value="Pre-Pregnancy Care">Pre-Pregnancy Care</option>
                     <option value="Obstetrics &amp; Maternity Care">Obstetrics &amp; Maternity Care</option>
                     <option value="PCOS (PMOS) &amp; Hormonal Health">PCOS (PMOS) &amp; Hormonal Health</option>
                     <option value="Menopause Care">Menopause Care</option>
                     <option value="Gynaecology Care">Gynaecology Care</option>
-                    <option value="Laparoscopy &amp; Minimally Invasive Surgery">Laparoscopy &amp; Minimally Invasive
-                      Surgery</option>
+                    <option value="Laparoscopy &amp; Minimally Invasive Surgery">Laparoscopy &amp; Minimally Invasive Surgery</option>
                   </select></div>
-                <div class="date-field"><label for="appointment-date" class="field-label-7">Choose a date*</label>
-                  <div class="code-embed-3 w-embed">
-                    <input type="date" id="appointment-date" name="Appointment Date" required class="w-input"
-                      style="border-radius: 12px; background-color: transparent; border: 1.1px solid #007276">
-                  </div>
+                <div class="date-field"><label for="appointment-date" class="field-label-7">Appointment Date*</label>
+                  <div class="code-embed-3 w-embed"><input type="date" id="appointment-date" name="Appointment Date" class="w-input appointment-date" style="border-radius: 12px; background-color: transparent; border: 1.1px solid #007276" required></div>
                 </div>
-                <div class="time-field"><label for="appointment-time" class="field-label-7">Choose a
-                    Time*</label><select id="appointment-time" name="Time" data-name="appointment-time" required=""
-                    class="select-field w-select">
+                <div class="time-field"><label for="appointment-time" class="field-label-7">Appointment Time</label><select id="appointment-time" name="Time" data-name="appointment-time" class="select-field w-select">
                     <option value="">HH:MM</option>
                     <option value="09:00 AM">09:00 AM</option>
                     <option value="09:30 AM">09:30 AM</option>
@@ -879,12 +866,9 @@
                     <option value="08:30 PM">08:30 PM</option>
                     <option value="09:00 PM">09:00 PM</option>
                   </select></div>
-                <div class="message-field"><label for="field-3" class="field-label-8">Additional Message
-                    (Optional)</label><textarea placeholder="Type your message..." maxlength="5000" id="field-3"
-                    name="Message" data-name="Field 3"
-                    class="textarea-2 w-node-b1d69197-a33d-da02-e2e3-c14f965766c4-4d0987f8 w-input"></textarea></div>
-                <input type="submit" data-wait="Please wait..." class="button apppointment-submit w-button"
-                  value="Submit" />
+                <div class="message-field"><label for="appointment-msg" class="field-label-8">Additional Message (Optional)</label><textarea placeholder="Type your message..." maxlength="5000" id="appointment-msg" name="Message" data-name="appointment-msg" class="textarea-2 w-input"></textarea></div>
+                <div class="form-secure-note"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M4.25 7V5a3.75 3.75 0 0 1 7.5 0v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><rect x="2.75" y="7" width="10.5" height="7" rx="2" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10.5" r="1.05" fill="currentColor"/></svg><span>Your information is secure and confidential</span></div>
+                <input type="submit" data-wait="Please wait..." class="button apppointment-submit w-button" value="Submit" />
               </form>
               <div class="success-message-2 w-form-done">
                 <div class="success-text">

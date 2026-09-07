@@ -20,7 +20,7 @@ const BREVO_CONTACT_ENDPOINT = 'https://api.brevo.com/v3/contacts';
 
 // Only these keys are ever read from a submission. Anything else is ignored,
 // so a crafted request can't inject arbitrary content into the email.
-const ALLOWED_FIELDS = ['Page', 'Name', 'Email', 'Phone', 'Service', 'Appointment Date', 'Time', 'Message', 'Consent'];
+const ALLOWED_FIELDS = ['Page', 'Name', 'Email', 'Phone', 'Service', 'Date of Birth', 'Appointment Date', 'Time', 'Message', 'Consent'];
 
 const FORMS = {
   appointments: { label: 'appointment', subject: 'New appointment request' },

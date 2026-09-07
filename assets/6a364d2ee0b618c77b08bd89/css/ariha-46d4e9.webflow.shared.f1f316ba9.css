@@ -14075,7 +14075,91 @@ body {
   cursor: pointer;
 }
 
-.modal-close:hover {
-  background-color: #0b4d8f;
+.modal-close:hover,
+.modal-close:focus-visible {
+  background-color: var(--cyaan);
+  border-color: var(--cyaan);
   color: #ffffff;
+}
+
+/* Appointment form - Figma "Modal pop up 2" layout ----------------------
+   The design puts Name / Phone / Email across one row in thirds, then two
+   half-width rows below. A six-column track gives both: thirds are span 2,
+   halves are span 3. Below 992px the form keeps its existing 2-up grid,
+   and below 480px it is already a flex column, so neither is touched. */
+.form-6 .message-field,
+.form-6 .form-secure-note,
+.form-6 .apppointment-submit {
+  grid-column: 1 / -1;
+}
+
+@media screen and (min-width: 992px) {
+  .form-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .form-6 .form-heading-block,
+  .form-6 .spacer {
+    grid-column: 1 / -1;
+  }
+
+  .form-6 .name-field,
+  .form-6 .number-field,
+  .form-6 .email-field {
+    grid-column: span 2;
+  }
+
+  .form-6 .dob-field,
+  .form-6 .service-field,
+  .form-6 .date-field,
+  .form-6 .time-field {
+    grid-column: span 3;
+  }
+
+  /* the design's submit is a left-aligned pill, not the old half-width bar */
+  .button.apppointment-submit {
+    justify-self: start;
+    width: auto;
+    min-width: 170px;
+  }
+}
+
+/* "Your information is secure and confidential" */
+.form-secure-note {
+  grid-column-gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+  font-family: var(--_topography---body);
+  color: var(--cyaan);
+  font-size: 16px;
+  display: flex;
+}
+
+.form-secure-note svg {
+  flex: none;
+}
+
+/* The selects had no affordance at all - the design shows a chevron. */
+.select-field {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%23007276' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 14px 9px;
+}
+
+/* Date placeholder colour keyed off an explicit data-filled flag set in
+   forms.js. The per-page inline <style> keys it off :valid, which is true
+   for an empty OPTIONAL date - so Date of Birth showed its dd-mm-yyyy
+   placeholder in full-strength text as though a date had been picked.
+   Selectors lead with the element to outrank that inline block. */
+input.appointment-date:not([data-filled])::-webkit-datetime-edit {
+  color: rgba(58, 58, 58, .4);
+}
+
+input.appointment-date[data-filled]::-webkit-datetime-edit {
+  color: #3a3a3a;
 }
