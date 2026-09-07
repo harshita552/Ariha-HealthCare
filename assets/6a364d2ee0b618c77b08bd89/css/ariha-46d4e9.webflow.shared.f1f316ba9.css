@@ -14173,3 +14173,55 @@ input.appointment-date[data-filled]::-webkit-datetime-edit {
   line-height: 1.4;
   display: none;
 }
+
+/* Areas of Expertise -----------------------------------------------------
+   Was two baked-in PNGs (one per breakpoint), so the specialities were
+   invisible to search engines and screen readers and could not be clicked.
+   Now real links to the seven service pages. Both copies of the doctor
+   section - .section-5 on desktop, .section_about on mobile - use this. */
+.expertise-list {
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  max-width: 560px;
+  margin-top: 18px;
+  display: flex;
+}
+
+.expertise-pill {
+  border-radius: 100px;
+  background-color: var(--creme);
+  color: var(--cyaan);
+  font-family: var(--_topography---body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
+  display: inline-block;
+}
+
+/* The section behind these is teal, so the hover state needs a cream ring
+   or the filled pill would disappear into the background. */
+.expertise-pill:hover,
+.expertise-pill:focus-visible {
+  background-color: var(--cyaan);
+  color: var(--creme);
+  box-shadow: inset 0 0 0 1px var(--creme);
+}
+
+@media screen and (max-width: 479px) {
+  .expertise-list {
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+    max-width: none;
+    margin-top: 14px;
+  }
+
+  .expertise-pill {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
