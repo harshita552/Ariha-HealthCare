@@ -13898,11 +13898,11 @@ a.blog-card:visited {
    which left the gap before the text at 39px, 16px and 10px. Pin every
    card to the first one's geometry so the spacing matches. */
 @media screen and (min-width: 992px) {
-  .blog-card {
+  .blog-card:not(.blog-page-card) {
     align-items: stretch;
   }
 
-  .blog-card .blog-image {
+  .blog-card:not(.blog-page-card) .blog-image {
     flex: 0 0 347px;
     width: 347px;
     align-self: stretch;
@@ -13911,11 +13911,23 @@ a.blog-card:visited {
   /* height:100% needs a definite parent, which the stretched wrapper gives
      it - without that the image fell back to its own height and a taller
      card was left with an empty strip underneath */
-  .blog-card .blog-image img {
+  .blog-card:not(.blog-page-card) .blog-image img {
     width: 317px;
     height: 100%;
     object-fit: cover;
   }
+}
+
+/* The rules above size the horizontal listing card on the blogs page. The
+   blog articles' slider uses a vertical 300px card, so the fixed 347px
+   wrapper and 317px image were spilling past its right edge - it needs to
+   fill the card instead. max-height overrides .image-32's 295px, which
+   would otherwise leave a strip below the photo. */
+.blog-card.blog-page-card .blog-image.blog-slider-image img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 479px) {
