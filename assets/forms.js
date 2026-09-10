@@ -143,6 +143,38 @@
    * altInput shows the patient dd-mm-yyyy instead.
    */
   var picker = null;
+  var dobPicker = null;
+
+  // altInput is the field the patient actually sees and types into, so the
+  // constraint has to move there - the original goes type="hidden", and hidden
+  // inputs are barred from validation, which would make a required field
+  // silently optional.
+  function moveRequiredToAltInput(fp, el, label) {
+    if (!fp.altInput) return;
+    fp.altInput.required = el.required;
+    el.required = false;
+    fp.altInput.setAttribute('aria-label', label);
+  }
+
+  function initDobPicker() {
+    var el = document.getElementById('appointment-dob');
+    if (!el || typeof flatpickr !== 'function' || dobPicker) return;
+
+    var now = new Date();
+    dobPicker = flatpickr(el, {
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'd-m-Y',
+      // typing beats clicking back through decades, so keep the field editable
+      allowInput: true,
+      maxDate: 'today', // nobody was born tomorrow
+      minDate: new Date(now.getFullYear() - 120, 0, 1),
+      monthSelectorType: 'dropdown',
+      disableMobile: true // else phones show the native picker and the two fields look different
+    });
+
+    moveRequiredToAltInput(dobPicker, el, 'Date of birth');
+  }
 
   function initPicker() {
     var el = appointmentDateField();
@@ -163,13 +195,7 @@
       ]
     });
 
-    // altInput is the visible field now, so the constraint has to live there -
-    // `required` on the hidden original is ignored by the browser
-    if (picker.altInput) {
-      picker.altInput.required = el.required;
-      el.required = false;
-      picker.altInput.setAttribute('aria-label', 'Appointment date');
-    }
+    moveRequiredToAltInput(picker, el, 'Appointment date');
   }
 
   // flatpickr hands the callback a local Date; toISOString() would shift it a
@@ -210,10 +236,17 @@
       });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadAvailability);
-  } else {
+  // Date of Birth needs no availability data, so it is set up independently -
+  // it must still get a picker on pages where the fetch fails.
+  function initDateFields() {
+    initDobPicker();
     loadAvailability();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDateFields);
+  } else {
+    initDateFields();
   }
 
   document.addEventListener('submit', function (e) {
