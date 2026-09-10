@@ -14225,3 +14225,65 @@ input.appointment-date[data-filled]::-webkit-datetime-edit {
     padding: 8px 16px;
   }
 }
+
+/* flatpickr, themed to the site ------------------------------------------
+   Used only on the appointment date, so blocked days render greyed out and
+   unclickable - a native date input can only do min/max. Date of Birth stays
+   a native input: nothing to block there, and native year navigation beats
+   flatpickr's for a birth year. */
+/* Every rule here is prefixed with `body` on purpose. flatpickr.min.css is
+   linked AFTER this stylesheet, so a bare .flatpickr-* selector ties on
+   specificity and loses on order - the header stayed white and the disabled
+   days kept flatpickr's near-invisible grey. The extra element bumps these
+   to (0,2,1) and up, which wins regardless of link order. */
+body .flatpickr-calendar {
+  border-radius: 14px;
+  box-shadow: 0 6px 24px #0000001f;
+  font-family: var(--_topography---body);
+}
+
+body .flatpickr-months .flatpickr-month,
+body .flatpickr-weekdays,
+body span.flatpickr-weekday {
+  background-color: var(--cyaan);
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+body .flatpickr-months .flatpickr-month {
+  border-radius: 14px 14px 0 0;
+}
+
+body .flatpickr-months .flatpickr-prev-month svg,
+body .flatpickr-months .flatpickr-next-month svg {
+  fill: #ffffff;
+}
+
+body .flatpickr-current-month .flatpickr-monthDropdown-months {
+  background-color: var(--cyaan);
+}
+
+body .flatpickr-day.selected,
+body .flatpickr-day.selected:hover {
+  border-color: var(--cyaan);
+  background: var(--cyaan);
+}
+
+body .flatpickr-day:hover {
+  background: var(--opacity--cyaanopaque);
+  border-color: #0000;
+}
+
+body .flatpickr-day.today {
+  border-color: var(--cyaan);
+}
+
+/* The blocked days. Struck through as well as greyed, so it reads as "not
+   available" rather than "nothing here". */
+body .flatpickr-day.flatpickr-disabled,
+body .flatpickr-day.flatpickr-disabled:hover {
+  color: #00000059;
+  background: #0000000a;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}

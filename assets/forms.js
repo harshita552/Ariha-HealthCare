@@ -106,7 +106,9 @@
       return;
     }
     var chosen = readableDate(el.value);
-    el.value = '';
+    // clear through the picker so the visible altInput empties too
+    if (picker) picker.clear();
+    else el.value = '';
     markDate(el);
     el.setCustomValidity('');
     showDateNotice(
@@ -132,8 +134,59 @@
     if (el && el.name === 'Appointment Date') checkAppointmentDate(el);
   });
 
+  /*
+   * flatpickr renders the blocked days greyed out and unclickable, which a
+   * native <input type="date"> cannot do - it only understands min/max.
+   *
+   * The input keeps its ISO value so nothing downstream changes: forms.js,
+   * /api/submit and the calendar all still speak YYYY-MM-DD. flatpickr's
+   * altInput shows the patient dd-mm-yyyy instead.
+   */
+  var picker = null;
+
+  function initPicker() {
+    var el = appointmentDateField();
+    if (!el || typeof flatpickr !== 'function' || picker) return;
+
+    picker = flatpickr(el, {
+      dateFormat: 'Y-m-d', // what gets submitted
+      altInput: true,
+      altFormat: 'd-m-Y', // what the patient sees
+      allowInput: true, // keeps the field focusable, so `required` still applies
+      minDate: 'today',
+      disableMobile: true, // else phones fall back to the native picker, which cannot grey days
+      disable: [
+        function (date) {
+          // called for every day drawn; re-evaluated on redraw()
+          return dateIsBlocked(localISO(date));
+        }
+      ]
+    });
+
+    // altInput is the visible field now, so the constraint has to live there -
+    // `required` on the hidden original is ignored by the browser
+    if (picker.altInput) {
+      picker.altInput.required = el.required;
+      el.required = false;
+      picker.altInput.setAttribute('aria-label', 'Appointment date');
+    }
+  }
+
+  // flatpickr hands the callback a local Date; toISOString() would shift it a
+  // day back for anyone east of UTC, which is everyone here
+  function localISO(date) {
+    return (
+      date.getFullYear() +
+      '-' +
+      String(date.getMonth() + 1).padStart(2, '0') +
+      '-' +
+      String(date.getDate()).padStart(2, '0')
+    );
+  }
+
   function loadAvailability() {
     if (!appointmentDateField()) return;
+    initPicker();
     fetch('/api/availability', { headers: { accept: 'application/json' } })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -145,6 +198,9 @@
           blockedDates: data.blockedDates,
           closedWeekdays: Array.isArray(data.closedWeekdays) ? data.closedWeekdays : []
         };
+        // the picker was built before the list arrived - redraw so the newly
+        // known dates actually grey out
+        if (picker) picker.redraw();
         // a date may already be filled in from a restored form
         checkAppointmentDate(appointmentDateField());
       })

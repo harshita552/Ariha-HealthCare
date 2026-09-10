@@ -77,14 +77,42 @@ busy day does not hammer Google.
   recurrence engine; the weekly closure is handled by `CLOSED_WEEKDAYS`.
 - **It does not reserve slots.** Two people can still request the same time —
   this form emails a request, it is not a booking system.
-- **The date picker cannot grey out days.** A native `<input type="date">`
-  supports only `min`/`max`, so a blocked day is refused on selection with the
-  reason shown under the field. Swapping in a datepicker library (flatpickr)
-  would let blocked days render greyed out instead.
+- **Transparency is ignored.** `TRANSP:TRANSPARENT` looks like "she is free",
+  and it is filtered out by most iCal consumers. Do not reinstate that filter:
+  Zoho sets it on every event not added to the free/busy schedule, which is the
+  normal case here, and filtering on it silently dropped every away-day.
 
 If the feed fails, the endpoint returns the fallback list rather than
 blocking everything or silently blocking nothing, and `/api/submit` never
 refuses a booking because the availability check itself broke.
+
+### The date field
+
+The appointment date uses **flatpickr** (`vendor/flatpickr.min.js`, v4.6.13,
+vendored — no CDN), because a native `<input type="date">` understands only
+`min`/`max` and cannot grey out individual days.
+
+The input keeps its ISO `YYYY-MM-DD` value, so `/api/submit`, the notification
+email and the calendar check are all unchanged; flatpickr's `altInput` shows
+the patient `dd-mm-yyyy`. `required` is moved onto that alt input during init —
+the original goes `type="hidden"`, and hidden inputs are barred from
+constraint validation, so leaving `required` there would make the field
+silently optional.
+
+Date of Birth stays a **native** date input: there is nothing to block, and
+native year navigation beats flatpickr's for a birth year.
+
+The flatpickr theme lives at the end of the shared stylesheet with every
+selector prefixed `body`. That stylesheet is linked *before* `flatpickr.min.css`,
+so a bare `.flatpickr-*` selector ties on specificity and loses on order.
+
+### Diagnosing
+
+`/api/availability?debug=1` adds counts of what the feed contained — events
+seen, all-day, timed, cancelled, transparent, recurring — plus the `DTSTART`
+parameter shapes. No event titles or content, so it is safe on a public URL.
+Use it when a date does not come through: `allDay:0` with `events:1` means the
+event was read but rejected, and the other counters say why.
 
 ## Setup order
 

@@ -23,6 +23,7 @@
   <link rel="apple-touch-icon" href="assets/img/webclip.png">
 
   <link rel="stylesheet" href="vendor/swiper-bundle.min.css">
+  <link rel="stylesheet" href="vendor/flatpickr.min.css">
 
   <style>
     /* Smooth transitions */
@@ -1268,7 +1269,7 @@
                     <option value="Laparoscopy &amp; Minimally Invasive Surgery">Laparoscopy &amp; Minimally Invasive Surgery</option>
                   </select></div>
                 <div class="date-field"><label for="appointment-date" class="field-label-7">Appointment Date*</label>
-                  <div class="code-embed-3 w-embed"><input type="date" id="appointment-date" name="Appointment Date" class="w-input appointment-date" style="border-radius: 12px; background-color: transparent; border: 1.1px solid #007276" required></div>
+                  <div class="code-embed-3 w-embed"><input type="text" id="appointment-date" name="Appointment Date" placeholder="dd-mm-yyyy" class="w-input appointment-date" style="border-radius: 12px; background-color: transparent; border: 1.1px solid #007276" required></div>
                 </div>
                 <div class="time-field"><label for="appointment-time" class="field-label-7">Appointment Time</label><select id="appointment-time" name="Time" data-name="appointment-time" class="select-field w-select">
                     <option value="">HH:MM</option>
@@ -2692,6 +2693,7 @@
       else window.addEventListener('load', function () { setTimeout(init, 300); });
     })();
   </script>
+  <script src="vendor/flatpickr.min.js"></script>
   <script src="assets/forms.js"></script>
 
   <!-- years-since script: keeps the experience counter current without a yearly edit -->
