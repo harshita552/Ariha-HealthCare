@@ -109,9 +109,18 @@ function parseIcs(text, horizonMs) {
     stats.events++;
 
     if (/^STATUS:CANCELLED\s*$/im.test(block)) { stats.cancelled++; continue; }
-    // TRANSP:TRANSPARENT is Google's "free" - she is not actually away
-    if (/^TRANSP:TRANSPARENT\s*$/im.test(block)) { stats.free++; continue; }
     if (/^RRULE[:;]/im.test(block)) { stats.recurring++; continue; }
+
+    /*
+     * TRANSP:TRANSPARENT is NOT a reason to skip. In Google it means "free",
+     * which sounds like "not really away" - but Zoho sets it on any event
+     * that is not added to the free/busy schedule, which is the normal case
+     * here. Filtering on it dropped every away-day Zoho produced. This is a
+     * calendar whose only purpose is marking absences: an all-day event on
+     * it means away, whatever the busy flag says. Counted for diagnostics
+     * only.
+     */
+    if (/^TRANSP:TRANSPARENT\s*$/im.test(block)) stats.free++;
 
     const start = readDateProp(block, 'DTSTART');
     if (!start.found) continue;
