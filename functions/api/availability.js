@@ -18,22 +18,28 @@ export async function onRequestGet(context) {
   const { request, env } = context;
   const data = await getAvailability(env, request);
 
-  return new Response(
-    JSON.stringify({
-      ok: true,
-      blockedDates: data.blockedDates,
-      closedWeekdays: data.closedWeekdays,
-      source: data.source
-    }),
-    {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        // short cache: a date blocked this morning should take effect today
-        'Cache-Control': 'public, max-age=' + BROWSER_CACHE_SECONDS
-      }
+  const payload = {
+    ok: true,
+    blockedDates: data.blockedDates,
+    closedWeekdays: data.closedWeekdays,
+    source: data.source
+  };
+
+  // ?debug=1 adds counts and the DTSTART parameter shapes seen in the feed,
+  // for working out why a date did not come through. Deliberately carries no
+  // event content - no titles, no dates beyond what is already returned.
+  const debug = new URL(request.url).searchParams.get('debug') === '1';
+  if (debug) payload.diagnostics = data.diagnostics;
+
+  return new Response(JSON.stringify(payload), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+      // short cache: a date blocked this morning should take effect today.
+      // debug requests skip it so a diagnosis is never a stale one.
+      'Cache-Control': debug ? 'no-store' : 'public, max-age=' + BROWSER_CACHE_SECONDS
     }
-  );
+  });
 }
 
 export async function onRequest(context) {

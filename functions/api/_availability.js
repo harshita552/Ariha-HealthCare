@@ -81,34 +81,57 @@ function unfold(text) {
  * a full RRULE engine, and the weekly closed day is handled by
  * CLOSED_WEEKDAYS instead.
  */
+/*
+ * Reads one DTSTART/DTEND line, whatever parameters the provider hangs off
+ * it. Google writes "DTSTART;VALUE=DATE:20260914"; others add a TZID, or
+ * drop VALUE=DATE and rely on the value being eight digits. All three mean
+ * the same thing. Returns the YYYYMMDD string only for a date-only value -
+ * anything carrying a time (…T090000) is a timed event and returns null.
+ */
+function readDateProp(block, name) {
+  const line = new RegExp('^' + name + '([^:\\r\\n]*):([^\\r\\n]+)$', 'im').exec(block);
+  if (!line) return { found: false, params: null, dateOnly: null };
+
+  const params = line[1] || '';
+  const value = line[2].trim();
+  const dateOnly = /^(\d{8})$/.test(value) ? value : null;
+  return { found: true, params: params, dateOnly: dateOnly };
+}
+
 function parseIcs(text, horizonMs) {
   const dates = new Set();
   const body = unfold(String(text));
   const blocks = body.split('BEGIN:VEVENT').slice(1);
-  let skippedRecurring = 0;
+  const stats = { events: 0, allDay: 0, timed: 0, cancelled: 0, free: 0, recurring: 0, shapes: [] };
 
   for (const raw of blocks) {
     const block = raw.split('END:VEVENT')[0];
+    stats.events++;
 
-    if (/^STATUS:CANCELLED\s*$/im.test(block)) continue;
+    if (/^STATUS:CANCELLED\s*$/im.test(block)) { stats.cancelled++; continue; }
     // TRANSP:TRANSPARENT is Google's "free" - she is not actually away
-    if (/^TRANSP:TRANSPARENT\s*$/im.test(block)) continue;
-    if (/^RRULE[:;]/im.test(block)) {
-      skippedRecurring++;
-      continue;
-    }
+    if (/^TRANSP:TRANSPARENT\s*$/im.test(block)) { stats.free++; continue; }
+    if (/^RRULE[:;]/im.test(block)) { stats.recurring++; continue; }
 
-    const start = /^DTSTART;VALUE=DATE:(\d{8})\s*$/im.exec(block);
-    if (!start) continue; // timed event - not a day away
+    const start = readDateProp(block, 'DTSTART');
+    if (!start.found) continue;
 
-    const end = /^DTEND;VALUE=DATE:(\d{8})\s*$/im.exec(block);
-    const startMs = icsDateToUTC(start[1]);
-    const endMs = end ? icsDateToUTC(end[1]) : startMs + DAY;
+    // record the parameter shape so a mismatch is diagnosable without
+    // exposing any event content
+    const shape = 'DTSTART' + start.params + ':' + (start.dateOnly ? '<date>' : '<datetime>');
+    if (stats.shapes.indexOf(shape) === -1 && stats.shapes.length < 6) stats.shapes.push(shape);
+
+    if (!start.dateOnly) { stats.timed++; continue; } // a timed event is not a day away
+    stats.allDay++;
+
+    const end = readDateProp(block, 'DTEND');
+    const startMs = icsDateToUTC(start.dateOnly);
+    const endMs = end.dateOnly ? icsDateToUTC(end.dateOnly) : startMs + DAY;
 
     addRange(dates, startMs, endMs, horizonMs);
   }
 
-  return { dates, skippedRecurring };
+  return { dates, skippedRecurring: stats.recurring, stats };
 }
 
 /* ---------- fallback file ---------------------------------------------- */
@@ -166,7 +189,8 @@ export async function getAvailability(env, request) {
     blockedDates: [],
     closedWeekdays: closedWeekdays(env),
     source: 'none',
-    skippedRecurring: 0
+    skippedRecurring: 0,
+    diagnostics: null
   };
 
   const icsUrl = env && env.CALENDAR_ICS_URL;
@@ -177,10 +201,13 @@ export async function getAvailability(env, request) {
         headers: { accept: 'text/calendar' }
       });
       if (res.ok) {
-        const parsed = parseIcs(await res.text(), horizonMs);
+        const body = await res.text();
+        const parsed = parseIcs(body, horizonMs);
         result.blockedDates = Array.from(parsed.dates).sort();
         result.skippedRecurring = parsed.skippedRecurring;
         result.source = 'calendar';
+        // shape only - counts and property parameters, never event content
+        result.diagnostics = Object.assign({ bytes: body.length }, parsed.stats);
         return result;
       }
       console.error('availability: calendar feed returned', res.status);
