@@ -14348,10 +14348,15 @@ a.tab-menu {
     max-width: 1600px;
   }
 
+  /* flex:1 means basis 0, which forces all seven cells to one width no matter
+     how long the label is - so centred text ended up with 24px of space on
+     "Laparoscopy..." and 72px on "Menopause Care". Basis auto sizes each cell
+     from its own text and shares the leftover space equally between them, so
+     every label gets the same gap either side. */
   .pill-tab .tab-menu,
   .pill-tab .tab-menu.rounded-l-corner,
   .pill-tab .tab-menu.rounded-r-corner {
-    flex: 1;
+    flex: 1 1 auto;
     justify-content: center;
     align-items: center;
     min-width: 0;
