@@ -14287,3 +14287,230 @@ body .flatpickr-day.flatpickr-disabled:hover {
   cursor: not-allowed;
   text-decoration: line-through;
 }
+
+/* Hero pill arrow ---------------------------------------------------------
+   Was an inline <style> repeated inside all five pills; now declared once
+   here, since there are seven of them. */
+.arrow-wrapper {
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  display: flex;
+}
+
+.arrow {
+  background: #007c84;
+  border-radius: 999px;
+  width: 22px;
+  height: 3px;
+  position: relative;
+}
+
+.arrow:before,
+.arrow:after {
+  content: "";
+  transform-origin: 100%;
+  background: #007c84;
+  border-radius: 999px;
+  width: 11px;
+  height: 3px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.arrow:before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.arrow:after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* The pills are links now rather than slider controls, so they need the
+   anchor reset the rest of the site gets, and a pointer. */
+a.tab-menu {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Hero pill with seven services -------------------------------------------
+   The original five items used percentage side padding (3.5-4.5% each), which
+   left ~86px of text width once there were seven - labels wrapped to four
+   lines and each pill ended up a different height (60-120px). Distribute the
+   row evenly instead and let every item share one height. */
+@media screen and (min-width: 992px) {
+  .pill-tab {
+    align-items: stretch;
+    width: 92%;
+    max-width: 1600px;
+  }
+
+  .pill-tab .tab-menu,
+  .pill-tab .tab-menu.rounded-l-corner,
+  .pill-tab .tab-menu.rounded-r-corner {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    padding: 10px 8px;
+    display: flex;
+  }
+
+  /* hairline dividers between services, as in the design */
+  .pill-tab .tab-menu + .tab-menu {
+    border-left: 1px solid #0072761f;
+  }
+
+  .pill-tab .tab-menu .paragraph {
+    margin-bottom: 0;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+}
+
+/* Narrow desktop / landscape tablet: seven items leave ~130px each, where
+   15px text ran to four lines. */
+@media screen and (min-width: 992px) and (max-width: 1279px) {
+  .pill-tab .tab-menu,
+  .pill-tab .tab-menu.rounded-l-corner,
+  .pill-tab .tab-menu.rounded-r-corner {
+    padding: 10px 8px;
+  }
+
+  .pill-tab .tab-menu .paragraph {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .pill-tab .tab-menu .paragraph {
+    font-size: 15px;
+  }
+}
+
+/* Pill position and states ------------------------------------------------
+   Mobile: the wrapper was pinned with top:63%, which suited a five-item list.
+   Seven items are 374px tall and the hero is 800px with overflow:hidden, so
+   the last two services fell outside it and were invisible. Anchor to the
+   bottom instead, so the list grows upward and stays inside whatever the
+   hero's height happens to be. */
+@media screen and (max-width: 767px) {
+  .pill-tab-wrapper {
+    top: auto;
+    bottom: 24px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  /* Both mockups show a service filled teal - the first on desktop, the
+     second on mobile - which is the hover state, not a fixed selection.
+     The end items take the pill's own radius so the fill doesn't square off
+     its rounded ends. */
+  .pill-tab .tab-menu.rounded-l-corner {
+    border-radius: 100px 0 0 100px;
+  }
+
+  .pill-tab .tab-menu.rounded-r-corner {
+    border-radius: 0 100px 100px 0;
+  }
+
+  .pill-tab .tab-menu:hover {
+    background-color: var(--cyaan);
+    transform: none; /* the inherited -2px lift looks wrong mid-row */
+  }
+
+  .pill-tab .tab-menu:hover .paragraph {
+    color: var(--creme);
+  }
+}
+
+/* Home hero mobile image --------------------------------------------------
+   .image-27 has width:100% but no height rule, so the img's height attribute
+   decided the rendered height - with the new 780x1874 portrait that meant a
+   1874px tall image squashed into 375px wide (object-fit:fill). Size it from
+   the hero instead and let cover crop, so the aspect ratio always holds
+   whatever dimensions the next image has.
+   Scoped to the home hero: the service pages use .image-27.blog-mobile-image,
+   which is positioned differently and must not be touched. */
+@media screen and (max-width: 479px) {
+  /* the content wrap sits at 667px inside an 800px slide, so inset:0 on the
+     image wrapper stopped 133px short of the slide bottom - the old image
+     only covered it by overflowing on a height attribute */
+  .section_hero .hero-slider-content-wrap,
+  .section_hero .bg-img-wrap {
+    height: 100%;
+    max-height: none; /* base rule caps this at 100vh (667px on an SE) */
+  }
+
+  .section_hero .bg-img-wrap .image-27:not(.blog-mobile-image) {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Hero photo framing -----------------------------------------------------
+   cover crops ~240px vertically at desktop. Centred, that took equal bites
+   off top and bottom; biasing the crop upward drops the subject lower in
+   frame, matching the Figma composition. */
+.section_hero .bg-img,
+.section_hero .bg-img-wrap .image-27 {
+  object-position: center 28%;
+}
+
+/* Mobile service rows -----------------------------------------------------
+   .text-block-29 carried white-space:nowrap, which was fine for the old
+   five short labels. "Laparoscopy & Minimally Invasive Surgery" then could
+   not wrap, so it stretched the middle column and squeezed the icon's .5fr
+   track down to a few pixels. Fixed icon track + wrapping text, matching the
+   design where that label sits on two lines. */
+@media screen and (max-width: 479px) {
+  .pill-tab .tab-menu .grid-3 {
+    grid-column-gap: 12px;
+    grid-template-columns: 50px 1fr 28px;
+    align-items: center;
+  }
+
+  .pill-tab .tab-menu .text-block-29 {
+    white-space: normal;
+    text-align: left;
+    justify-content: flex-start;
+    line-height: 1.3;
+  }
+
+  .pill-tab .tab-menu .img-block {
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    display: flex;
+  }
+
+  .pill-tab .tab-menu .image-26 {
+    flex: none;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Mobile hero copy --------------------------------------------------------
+   The copy is centred in an 800px wrap, which put the heading at 29% of the
+   hero against ~20% in the design. Padding the bottom shortens the box the
+   copy centres in, lifting heading and button by half the padding. */
+@media screen and (max-width: 479px) {
+  .section_hero .hero-slider-content-wrap {
+    padding-bottom: 120px;
+  }
+}
+
+/* The 28% crop above suits the desktop photo, but on mobile it trims the
+   bottom of a tall portrait - which is where the doctor and patient are, so
+   they sat low and half behind the service list. Bias the crop the other way
+   to lift them into frame, as the design shows. */
+@media screen and (max-width: 479px) {
+  .section_hero .bg-img-wrap .image-27:not(.blog-mobile-image) {
+    object-position: center 45%;
+  }
+}

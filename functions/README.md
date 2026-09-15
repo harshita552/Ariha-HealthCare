@@ -99,8 +99,11 @@ the original goes `type="hidden"`, and hidden inputs are barred from
 constraint validation, so leaving `required` there would make the field
 silently optional.
 
-Date of Birth stays a **native** date input: there is nothing to block, and
-native year navigation beats flatpickr's for a birth year.
+Date of Birth uses flatpickr too, so both date fields look the same. It has no
+`disable` list — nothing to block — but it is capped at `maxDate: 'today'`,
+floored 120 years back, and gets a month dropdown. `allowInput` matters more
+here than on the appointment field: typing `12-03-1994` beats clicking back
+through three decades.
 
 The flatpickr theme lives at the end of the shared stylesheet with every
 selector prefixed `body`. That stylesheet is linked *before* `flatpickr.min.css`,
