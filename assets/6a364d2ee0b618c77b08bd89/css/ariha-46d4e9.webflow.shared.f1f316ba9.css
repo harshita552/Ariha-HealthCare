@@ -14475,7 +14475,7 @@ a.tab-menu {
 @media screen and (max-width: 479px) {
   .pill-tab .tab-menu .grid-3 {
     grid-column-gap: 12px;
-    grid-template-columns: 50px 1fr 28px;
+    grid-template-columns: 40px 1fr 28px;
     align-items: center;
   }
 
@@ -14489,14 +14489,17 @@ a.tab-menu {
   .pill-tab .tab-menu .img-block {
     justify-content: center;
     align-items: center;
-    width: 50px;
+    width: 40px;
     display: flex;
   }
 
+  /* max-height/font-size/line-height are all set to 50px on .image-26 further
+     up, so height alone would not shrink it */
   .pill-tab .tab-menu .image-26 {
     flex: none;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+    max-height: 40px;
   }
 }
 
