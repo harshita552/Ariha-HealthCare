@@ -13783,29 +13783,11 @@ a.blog-card:visited {
   }
 }
 
-/* The Practo icon is a 46px badge that draws its own ring, unlike the
-   other social glyphs which are 21px marks sitting inside the ring that
-   .div-block-15 draws. Drop the wrapper's border for this one so the
-   badge is not ringed twice, and let the icon fill the same footprint. */
-.div-block-15.practo-social {
-  border: none;
-}
-
-.div-block-15.practo-social img {
-  width: 44px;
-  height: 44px;
-}
-
-/* Mobile menu social icons. The nav glyphs are ~22px tall, so the 46px
-   Practo badge has to be brought down to match them. */
+/* Mobile menu social icons. Both glyphs are now the same 21px line marks
+   (Instagram and email), so they need no per-icon sizing - just alignment. */
 .social-icons .nav-social-link {
   align-items: center;
   display: inline-flex;
-}
-
-.social-icons .nav-practo-icon {
-  width: 26px;
-  height: 26px;
 }
 
 @media screen and (max-width: 479px) {
@@ -13831,21 +13813,12 @@ a.blog-card:visited {
     height: 28px;
   }
 
-  .social-icons .nav-practo-icon {
-    width: 34px;
-    height: 34px;
-  }
 }
 
-@media screen and (max-width: 479px) {
-  /* The row does not centre its items, so the 34px icon block hangs 7px
-     below the shorter "Contact Us" text box. Lift the icons rather than
-     centring the row, which would push the text down instead. */
-  .social-icons {
-    position: relative;
-    top: -7px;
-  }
-}
+/* The -7px lift that used to live here compensated for the 34px Practo
+   badge sitting lower than the 28px Instagram glyph. Both icons are now
+   28px, so the row lines up on its own and the offset would push them
+   too high. */
 
 /* "Home" belongs only in the mobile menu - on desktop the logo already
    serves that purpose, so it stays hidden above the menu breakpoint. */
