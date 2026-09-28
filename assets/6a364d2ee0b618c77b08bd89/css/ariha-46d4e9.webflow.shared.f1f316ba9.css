@@ -14495,3 +14495,14 @@ a.tab-menu {
     object-position: center 45%;
   }
 }
+
+/* "Keep Reading" slider ---------------------------------------------------
+   Slide width was 33.3% base but 34% from 1440 and 33% from 1920, so three
+   slides came to 102% of the mask and the third was permanently clipped with
+   nothing to scroll to. Exactly one third fits three cleanly; the duplicated
+   set of posts behind them is what gives data-infinite something to loop. */
+@media screen and (min-width: 480px) {
+  .blog-p-slider {
+    width: 33.3333%;
+  }
+}
