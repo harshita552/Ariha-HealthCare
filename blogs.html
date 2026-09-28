@@ -957,21 +957,10 @@
                   <div class="blogs-container">
                     <div class="blog-wrapper">
                       <div class="blog-filter-bar">
-                        <div class="category-wrapper">
-                          <!-- One pill per category that actually exists on a post. The
-                               filter matches data-category against the card's .b-category
-                               text, so these strings must stay in step with the cards:
-                               Pregnancy & Maternity (2 posts), Adolescent Health (1). -->
-                          <div data-category="all" class="category-pill">
-                            <div>All Articles</div>
-                          </div>
-                          <div data-category="pregnancy &amp; maternity" class="category-pill">
-                            <div>Pregnancy &amp; Maternity</div>
-                          </div>
-                          <div data-category="adolescent health" class="category-pill">
-                            <div>Adolescent Health</div>
-                          </div>
-                        </div>
+                        <!-- Category pills removed; search is the only filter now. The
+                             filtering script still reads .category-pill, so re-adding
+                             pills here (with data-category matching a card's
+                             .b-category text) would start working again on its own. -->
                         <div class="search-wrapper">
                           <div class="input-wrapper">
                             <div class="form-block-2 w-form">

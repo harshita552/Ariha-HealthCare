@@ -14506,3 +14506,55 @@ a.tab-menu {
     width: 33.3333%;
   }
 }
+
+/* Appointment modal watermark --------------------------------------------
+   Centred Ariha mark behind the form, as in the design. background-image
+   only, so .modal-box keeps its cream background-color underneath; the PNG
+   already carries its own low opacity, so nothing extra is needed. The modal
+   scrolls its content, but a background defaults to scroll attachment and so
+   stays put against the box rather than sliding with the fields. */
+.modal-box {
+  background-image: url("../watermark-appointmentform.png");
+  background-position: 50% 52%;
+  background-repeat: no-repeat;
+  background-size: 55% auto;
+}
+
+/* Blogs filter bar, search only -------------------------------------------
+   The category pills are gone, so the bar no longer needs space-between to
+   push them apart, and the search box spans the full row. The wrapper needs
+   flex:1 because it is content-sized by default - without it, width:100% on
+   the box has nothing to resolve against and collapses to the text width. */
+.blog-filter-bar {
+  justify-content: flex-start;
+}
+
+/* Match the blog card beneath it. .left-column (which the cards fill) is
+   70% of the same 1280px row and shares its left edge, so the same 70% keeps
+   the search box and the cards flush without hardcoding a pixel width. */
+.blog-filter-bar .search-wrapper {
+  flex: 1;
+}
+
+.blog-filter-bar .input-wrapper {
+  width: 70%;
+  /* was 5px 5% 5px 8% - percentage padding grew with the box, so at card
+     width the placeholder sat 72px in and the icon 45px from the edge */
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media screen and (max-width: 479px) {
+  /* Search was hidden on phones because the scrolling category row owned
+     this space. It is the only control now, so hiding it would leave an
+     empty bar. flex:1 because the wrapper is content-sized by default, which
+     otherwise left the box only 190px wide. */
+  .blog-filter-bar .search-wrapper {
+    flex: 1;
+    display: flex;
+  }
+
+  .blog-filter-bar .input-wrapper {
+    width: 100%;
+  }
+}
