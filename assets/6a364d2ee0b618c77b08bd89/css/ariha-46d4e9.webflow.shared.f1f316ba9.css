@@ -6063,27 +6063,56 @@ textarea.w-input, textarea.w-select {
   display: flex;
 }
 
+/* Arrow + dot cluster under the blog slider.
+   The arrows used to be anchored with percentages (right:-27% / left:58%),
+   so the gap between them scaled with the slider while the dot strip stayed
+   a fixed 46px: roomy at 1920, and touching the arrows by ~1000px. Anchor
+   both arrows to the same point the dots centre on - 71.5%, the middle of
+   the nav's 43%->100% band - with pixel offsets, so the spacing is identical
+   at every width. 95px = 23 (half the dot strip) + 22 (gap) + 50 (arrow);
+   45px = the same minus the arrow's own width. Horizontal margins must be
+   zeroed: .w-slider-arrow-* is `inset: 0` + `margin: auto`, which would
+   otherwise re-centre the arrow in whatever band is left. */
 .left-arrow-5 {
   width: 50px;
   height: 50px;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
   top: 102%;
-  right: -27%;
+  left: calc(71.5% - 95px);
+  right: auto;
 }
 
 .right-arrow-5 {
   width: 50px;
   height: 50px;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
   top: 102%;
-  left: 58%;
+  left: calc(71.5% + 45px);
+  right: auto;
 }
 
+/* The dots used to sit at top:104% while the arrows sit at top:102%. Both are
+   percentages of the SLIDER height, so the 2% between them scaled with the
+   cards - the two only lined up at one particular height and drifted apart
+   whenever the slider grew or shrank (e.g. filtering the list). Anchor the
+   dots to the arrows' own 102% and give them the arrows' 50px box, so the
+   centres coincide at any height. left/right are unchanged, so the cluster
+   keeps its horizontal position. */
 .slide-nav-2.b-slider-dot {
-  top: 104%;
+  top: 102%;
+  /* .w-slider-nav is `inset: auto 0 0` + `margin: auto`. Setting top without
+     releasing bottom leaves the box constrained top AND bottom, and the auto
+     margins then centre it in that band - computing to margin-top:-25px and
+     pulling the dots half a box above the arrows. */
+  bottom: auto;
+  margin: 0;
   left: 43%;
+  right: 0;
+  height: 50px;
+  padding-top: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .text-field {
@@ -8062,20 +8091,17 @@ textarea.w-input, textarea.w-select {
     display: flex;
   }
 
-  .left-arrow-5 {
-    right: -27%;
-  }
-
-  .right-arrow-5 {
-    left: 58%;
-  }
+  /* the arrows' horizontal anchoring is handled once in the base rule now;
+     re-declaring right:-27% / left:58% here would put the percentage-based
+     spacing back at exactly the widths it is least suited to */
 
   .slide-nav-2 {
     color: var(--cyaan);
   }
 
   .slide-nav-2.b-slider-dot {
-    top: 104%;
+    /* match the arrows' 102%, as in the base rule - see the note there */
+    top: 102%;
     left: 43%;
   }
 
@@ -13769,17 +13795,16 @@ a.blog-card:visited {
   .blog-slider .w-slider-arrow-left,
   .blog-slider .w-slider-arrow-right,
   .blog-slider .w-slider-nav {
+    /* one value for all three: the dots now share the arrows' box, so the
+       6px correction that used to be needed here is handled structurally */
     margin-top: 1.75rem;
   }
 
-  /* the dots end up 6px higher than the arrows once both are shifted */
-  .blog-slider .w-slider-nav {
-    margin-top: calc(1.75rem + 6px);
-  }
-
-  /* the shifted arrows eat into the space below, so give it back */
+  /* the shifted arrows eat into the space below, so give it back - but 9rem
+     left ~57px of dead space under the arrows, which read as a gap above the
+     CTA card that follows. 7rem keeps the arrows clear with room to spare. */
   .padding-section-medium.blogs-paading {
-    padding-bottom: 9rem;
+    padding-bottom: 7rem;
   }
 }
 
@@ -14568,6 +14593,10 @@ a.tab-menu {
   .blog-mob-cta .image-33 {
     width: 100%;
     height: auto;
+    /* The img carries width="350" but no height, so with height:auto the box
+       reserved nothing until the lazy image loaded and the heading and button
+       - both absolutely positioned over it - had no card to sit on. */
+    aspect-ratio: 350 / 180;
   }
 
   .section-cta .padding-section-medium {
