@@ -14558,3 +14558,23 @@ a.tab-menu {
     width: 100%;
   }
 }
+
+/* Mobile "Need Personal Guidance" CTA -------------------------------------
+   The card graphic was pinned to its natural 350px inside a 405px column,
+   so it sat left with dead space down the right edge. Fill the column, and
+   cut the stack of spacing above it: 48px section padding + 16px on
+   .margin-top sat on top of the blog section's own bottom padding. */
+@media screen and (max-width: 479px) {
+  .blog-mob-cta .image-33 {
+    width: 100%;
+    height: auto;
+  }
+
+  .section-cta .padding-section-medium {
+    padding-top: 8px;
+  }
+
+  .section-cta .margin-top {
+    margin-top: 0;
+  }
+}
