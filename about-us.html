@@ -774,6 +774,14 @@
         </div>
       </div>
       <main class="main-wrapper">
+        <!-- Hero banner hidden for now at the client's request.
+             To bring it back, delete the two comment markers wrapping the
+             section: the opener on the next line, and the closer just before
+             the modal wrapper further down.
+             Nothing else depends on it. No link targets its id="home", and
+             the appointment modal below is a separate block whose triggers
+             live elsewhere on the page. -->
+        <!--
         <section id="home" data-animate="fade-in" class="section_hero nav-light">
           <div class="hero-slider-comp">
             <div class="swiper-container hero-slider">
@@ -809,6 +817,7 @@
             </div>
           </div>
         </section>
+        -->
         <div class="modal-wrapper">
           <div class="modal-box"><button type="button" class="modal-close" aria-label="Close appointment form">&times;</button>
             <div class="form-block-4 w-form">
@@ -893,7 +902,7 @@
             </div>
           </div>
         </div>
-        <section class="dark-section section-mission nav-light">
+        <section class="dark-section section-mission nav-light hero-hidden-offset">
           <div class="padding-global">
             <div class="container-large">
               <div class="padding-section-medium">

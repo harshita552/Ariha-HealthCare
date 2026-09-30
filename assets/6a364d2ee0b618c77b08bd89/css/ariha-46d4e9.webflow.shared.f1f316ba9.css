@@ -14607,3 +14607,124 @@ a.tab-menu {
     margin-top: 0;
   }
 }
+
+/* about-us, while the hero banner is commented out ------------------------
+   With the hero gone this is the first section on the page, and .nav-wrap is
+   position:fixed at 96px tall so it takes no space in flow - the "OUR VISION
+   / MISSION" label ended up with 4px of clearance under the navbar. Pad the
+   section itself rather than its inner .padding-section-medium: the section
+   is what paints the teal, so the background still runs up behind the nav
+   while the content clears it.
+   96px clears the navbar at its tallest (112px on wide screens, 96px below
+   that, 80px on phones) and leaves breathing room under it.
+   Drop the hero-hidden-offset class from the markup when the hero returns. */
+.section-mission.hero-hidden-offset {
+  padding-top: 96px;
+}
+
+@media screen and (max-width: 479px) {
+  /* "Why Ariha Healthcare" ring of labels ---------------------------------
+     The five labels are absolutely positioned against .why-choose-reasons,
+     whose height comes entirely from the circle image. That image is lazy
+     and carried no intrinsic size, so until it loaded the box was ~0 tall
+     and all five labels collapsed onto one line. After it loaded, "Privacy
+     & Dignity" still landed on the circle's top edge and the two left
+     labels hung ~15px past the container's left edge.
+
+     Reserve the image's box up front, size the circle as a share of the
+     width so the side gutters scale with the screen, and anchor each label
+     to an edge instead of a percentage of a height that moves.
+     Webflow's fade-in writes an inline transform onto every one of these
+     labels, so none of this may rely on transform for centring. */
+  .why-choose-reasons {
+    padding-top: 12%;
+  }
+
+  /* 40% normally, but never wider than what leaves a 125px gutter each side:
+     the labels are text at a fixed px size, so they do NOT shrink with the
+     screen the way a percentage circle does. Below ~430px the type steps
+     down too (see the next block) and the reserve shrinks with it. */
+  .why-choose-reasons .image-39 {
+    width: min(40%, calc(100% - 250px));
+    height: auto;
+    aspect-ratio: 194 / 198;
+  }
+
+  /* its own row, centred above the circle */
+  .reason-content-wrap.top-reason {
+    inset: 0 0 auto;
+    text-align: center;
+  }
+
+  .reason-content-wrap.top-reason .heading-11 {
+    width: auto;
+  }
+
+  /* The two left labels carry their own <br> setting the lines the copy was
+     written for ("Accessibility &" / "Convenience"). Letting them re-wrap
+     stranded the "&" on a line of its own, so hold those breaks exactly as
+     authored and let the label size to its longest line (~108px).
+     The right pair is deliberately NOT nowrapped: "Seamless Healthcare
+     Support" measures 142px on its authored two lines, which is wider than
+     the gutter, so it keeps wrapping to three narrow lines instead. */
+  .reason-content-wrap.top-left,
+  .reason-content-wrap.bottom-left {
+    text-align: right;
+    white-space: nowrap;
+    left: 2%;
+    right: auto;
+  }
+
+  .reason-content-wrap.top-left .heading-13,
+  .reason-content-wrap.bottom-left .heading-12 {
+    width: auto;
+  }
+
+  .reason-content-wrap.top-right,
+  .reason-content-wrap.bottom-right {
+    text-align: left;
+    left: auto;
+    right: 2%;
+  }
+
+  /* .heading-15 was pinned to 60px, but "Healthcare" is a single unbreakable
+     word ~80px wide, so the text overflowed its own box and spilled past the
+     container's right edge. Size the box to that word instead, in em so it
+     follows the type step below. */
+  .reason-content-wrap.top-right .heading-15 {
+    width: 5.4em;
+  }
+
+  /* top pair grows downward, bottom pair upward - neither can spill out */
+  .reason-content-wrap.top-left,
+  .reason-content-wrap.top-right {
+    top: 26%;
+    bottom: auto;
+  }
+
+  .reason-content-wrap.bottom-left,
+  .reason-content-wrap.bottom-right {
+    top: auto;
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  /* "Accessibility &" and "Comfortable &" set the left labels at a fixed
+     ~108px at 15px. Below ~430 the gutter beside the circle drops under
+     that, so the circle would have to shrink to a token size to keep them
+     clear. Step the ring's type down once instead: the labels come in at
+     ~94px, the authored line breaks still hold, and the circle stays a
+     usable size. */
+  .reason-content-wrap .heading-11,
+  .reason-content-wrap .heading-12,
+  .reason-content-wrap .heading-13,
+  .reason-content-wrap .heading-14,
+  .reason-content-wrap .heading-15 {
+    font-size: 13px;
+  }
+
+  .why-choose-reasons .image-39 {
+    width: min(40%, calc(100% - 220px));
+  }
+}
