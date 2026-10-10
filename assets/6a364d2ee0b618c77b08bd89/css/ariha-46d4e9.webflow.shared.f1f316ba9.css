@@ -14728,3 +14728,29 @@ a.tab-menu {
     width: min(40%, calc(100% - 220px));
   }
 }
+
+/* Bulleted answers inside an FAQ accordion. The base ul rule indents 40px,
+   which pushes the points well past the answer text; 20px lines them up
+   under it. The li inherits the answer's type, so nothing else is set. */
+.answer-class .answer-list {
+  margin-top: 8px;
+  margin-bottom: 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.answer-class .answer-list li {
+  margin-bottom: 4px;
+}
+
+.answer-class .answer-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* "Your Care Journey" step headings ("01. Finding the Root Cause" and the
+   rest) in brand teal across all seven service pages. .heading-24 is used
+   only by these headings - 5 per page, 35 in total - so no other text moves
+   with it. The step's body copy is .text-block-68 and keeps its own colour. */
+.heading-24 {
+  color: var(--cyaan);
+}
