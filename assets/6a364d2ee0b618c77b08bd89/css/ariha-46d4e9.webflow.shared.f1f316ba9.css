@@ -14754,3 +14754,37 @@ a.tab-menu {
 .heading-24 {
   color: var(--cyaan);
 }
+
+/* Navbar logo size, after the revised artwork ----------------------------
+   The old mark was stacked (144x120), so 80px tall read as ~96px wide. The
+   revised lockup is horizontal at 3.14:1, so the same 80px made it ~251px
+   wide and far heavier in the bar. Each page's own <style> pins these to
+   width/height 100%, but the box is only a frame: the SVG letterboxes
+   inside it via preserveAspectRatio, so max-height is what actually sets
+   the drawn size. 56px gives ~176x56. */
+.logo-green,
+.logo-white {
+  max-height: 56px;
+}
+
+/* Footer logo, same swap. At the inherited max-height:100px the horizontal
+   lockup came out 314px wide - 2.6x the width of the stacked mark it
+   replaced, and nearly twice the navbar logo. 72px gives ~226x72, keeping
+   the footer mark larger than the navbar one as it was before. */
+.image-16 {
+  max-height: 72px;
+}
+
+/* Each page's own <style> pins these to top:0 inside an 80px wrapper. While
+   max-height was also 80px the box filled it and looked centred; at 56px it
+   left 24px of space below and the mark rode high in the bar. top/bottom 0 with
+   auto block margins centres it. Left/right are deliberately untouched: the
+   wrapper's centre sits ~96px right of the viewport's, so centring the box
+   in the wrapper would push the mark further off, not less. */
+.logo-wrapper .logo-green,
+.logo-wrapper .logo-white {
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
