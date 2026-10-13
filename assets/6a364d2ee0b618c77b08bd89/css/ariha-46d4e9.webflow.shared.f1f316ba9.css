@@ -14788,3 +14788,21 @@ a.tab-menu {
   margin-top: auto;
   margin-bottom: auto;
 }
+
+@media screen and (max-width: 991px) {
+  /* The brand link is ~92px wide on phones - a box sized for the old stacked
+     mark, which was nearly square. The horizontal lockup needs ~3.14x its
+     height in width, so in that box it could only draw 23px tall and the
+     wordmark became unreadable. Widen the box: the hamburger sits at ~304px
+     on a 375px screen, so a 160px logo clears it easily. */
+  .navbar2_logo-link,
+  .logo-wrapper {
+    width: 160px;
+  }
+
+  .logo-wrapper .logo-green,
+  .logo-wrapper .logo-white {
+    max-width: 100%;
+    max-height: 48px;
+  }
+}
