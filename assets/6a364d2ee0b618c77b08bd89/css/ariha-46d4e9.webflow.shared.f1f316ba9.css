@@ -15080,3 +15080,39 @@ a.tab-menu {
     padding-right: 20px;
   }
 }
+
+@media screen and (max-width: 479px) {
+  /* The footer's contact values carry a desktop max-width:290px, which is
+     wider than the column they sit in on a phone - the phone, email and
+     location blocks each stuck 10px out of their column. That left only
+     5px between them and the edge of a 375px screen, so anything that
+     narrows the viewport slightly (a classic scrollbar, a different font
+     metric) tipped the page into scrolling sideways.
+     Cap them to the column, and let the email address - one long
+     unbreakable token - wrap rather than set a minimum width. */
+  /* max-width:100% alone is not enough here: these blocks also carry a
+     10px left margin, so 100% of the column plus the margin lands 10px
+     past it. The calc takes the margin off. */
+  .text-block-18,
+  .text-block-18.green-text {
+    max-width: calc(100% - 10px);
+    overflow-wrap: anywhere;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  /* Nothing on a phone should be able to scroll the page sideways. The
+     layout bugs that caused it have been fixed above, but the page also
+     carries a third-party chat widget whose markup we do not control, so
+     this is the backstop.
+
+     clip rather than hidden: hidden on html/body makes them a scroll
+     container, which breaks position:sticky descendants and scroll
+     anchoring. clip just clips. hidden stays as the fallback for browsers
+     without clip (Safari < 16). */
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+}
