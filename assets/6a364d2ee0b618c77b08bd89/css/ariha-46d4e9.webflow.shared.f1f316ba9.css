@@ -13707,9 +13707,18 @@ a.blog-card:visited {
 }
 
 @media screen and (max-width: 479px) {
-  /* more fixed widths wider than a small phone */
+  /* The footer quote column keeps its desktop max-width:30%, which on a
+     360px screen leaves only ~99px. The paragraph inside was given a fixed
+     width:350px to compensate, so it overflowed its own parent and set the
+     page's minimum width - that is what pushed the document to 364px and
+     let it scroll sideways. Free the column, then the paragraph can simply
+     fill it. */
+  .footer-quote-block {
+    max-width: 100%;
+  }
+
   .div-block-21 {
-    /* width: 100%; */
+    width: 100%;
     max-width: 350px;
   }
 
@@ -15045,4 +15054,29 @@ a.tab-menu {
 .corousel-card .text-block-10 {
   font-size: 18px;
   line-height: 1.3;
+}
+
+/* Home page "Latest Articles" slider -------------------------------------
+   Each Webflow slide used to hold three cards. A slider advances one slide
+   at a time and the mask shows one slide's width, so on a phone - where a
+   single card already fills the mask - the second and third card of every
+   slide were clipped with no way to reach them. Only the first post was
+   ever visible.
+
+   One card per slide now, with the slide itself a third of the mask on
+   larger screens so three still show at once. Same arrangement as the
+   article pages' Keep Reading slider above. */
+.slider-2 .w-slide .slider-card {
+  width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .slider-2 .w-slide {
+    width: 33.3333%;
+  }
+
+  /* the 20px gutter the three-up row used to get from .slider-wrapper's gap */
+  .slider-2 .w-slide .slider-wrapper {
+    padding-right: 20px;
+  }
 }
