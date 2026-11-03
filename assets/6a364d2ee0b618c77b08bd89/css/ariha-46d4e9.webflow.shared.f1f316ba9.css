@@ -15136,3 +15136,15 @@ a.tab-menu {
 .mobile-slide .image-23 {
   border-radius: 24px 24px 0 0;
 }
+
+/* The certificate fills its slot (cover) but sat hard against the card's
+   edges. Inset it slightly: box-sizing is border-box, so the padding comes
+   out of the content box and the image still covers what is left, giving an
+   even frame on all four sides rather than the uneven letterbox that
+   object-fit:contain produced. The padding is the card's own creme, so it
+   reads as the card showing through instead of a white mat. */
+.corousel-card .image-7.c-cert-img,
+.mobile-slide .image-23.c-cert-img {
+  background-color: var(--creme);
+  padding: 10px 10px 0;
+}
